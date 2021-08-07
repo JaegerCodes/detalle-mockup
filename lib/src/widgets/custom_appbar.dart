@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class SearchBar extends StatelessWidget {
   final String texto;
   final bool readonly;
+  final Function(String)? onChanged;
 
   SearchBar({
     required this.texto,
     required this.readonly,
+    this.onChanged,
   });
   void pushSearchScreen(BuildContext context) {
     Navigator.push(context,
@@ -43,6 +45,11 @@ class SearchBar extends StatelessWidget {
                       )
                     : TextField(
                         autofocus: true,
+                        onChanged: (x) {
+                          if (onChanged != null) {
+                            onChanged!(x);
+                          }
+                        },
                         decoration: InputDecoration(
                           hintText: 'Buscar...',
                         ),

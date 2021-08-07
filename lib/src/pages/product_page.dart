@@ -31,14 +31,12 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    products =
-        Provider.of<ProductsProvider>(context, listen: false).products ?? [];
+    getProducts();
   }
 
   @override
   Widget build(BuildContext context) {
     cambiarStatusDark();
-    getProducts();
     return Scaffold(
       // body: CustomAppBar( texto: 'For you' )
       // body: ZapatoSizePreview(),

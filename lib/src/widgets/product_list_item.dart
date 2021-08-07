@@ -19,7 +19,8 @@ class ProductListItem extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => ProductDescPage(tag: tag)));
+                builder: (BuildContext context) =>
+                    ProductDescPage(tag: tag, data: data!)));
       },
       child: Container(
         decoration: BoxDecoration(

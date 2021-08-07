@@ -23,7 +23,9 @@ class _ProductSearchState extends State<ProductSearch> {
 
     //this.products = [...categoriesResp.categorias];
     setState(() {
-      this.products = productsResp.body.hits.hits.first.source.items;
+      this.products = productsResp.body.hits.hits.length > 0
+          ? productsResp.body.hits.hits.first.source.items
+          : [];
     });
   }
 
@@ -47,6 +49,9 @@ class _ProductSearchState extends State<ProductSearch> {
           SearchBar(
             texto: '',
             readonly: false,
+            onChanged: (word) {
+              getProducts(searchWord: word);
+            },
           ),
           SizedBox(height: 20),
           Expanded(

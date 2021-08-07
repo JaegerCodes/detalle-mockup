@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:buscape/src/models/product_response.dart';
 import 'package:buscape/src/widgets/button_themed.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/oeschle_app_bar.dart';
@@ -10,7 +11,8 @@ import 'package:buscape/src/helpers/helpers.dart';
 
 class ProductDescPage extends StatelessWidget {
   final String tag;
-  const ProductDescPage({required this.tag});
+  final Item data;
+  const ProductDescPage({required this.tag, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +38,8 @@ class ProductDescPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ProductDescription(
-                titulo: 'Nike Air Max 720',
-                descripcion:
-                    "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
+                titulo: data.name!,
+                descripcion: "",
               ),
               _AmountBuyNow(),
               ColorsAndMore(),
