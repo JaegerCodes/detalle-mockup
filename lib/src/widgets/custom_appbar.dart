@@ -1,4 +1,4 @@
-import 'package:buscape/src/pages/zapato_desc_page.dart';
+import 'package:buscape/src/pages/product_desc_page.dart';
 import 'package:flutter/material.dart';
 
 

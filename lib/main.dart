@@ -1,5 +1,5 @@
 import 'package:buscape/src/models/zapato_model.dart';
-import 'package:buscape/src/pages/zapato_page.dart';
+import 'package:buscape/src/pages/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
  
