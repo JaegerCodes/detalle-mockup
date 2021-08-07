@@ -27,6 +27,8 @@ class ColorsAndMore extends StatelessWidget {
           left: hspace * i,
           child: ButtonColor(colors[i], (i + 1), 'assets/imgs/verde.png')));
     }
+    
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30),
       child: Row(
