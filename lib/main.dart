@@ -1,5 +1,6 @@
 import 'package:buscape/src/models/zapato_model.dart';
 import 'package:buscape/src/pages/product_page.dart';
+import 'package:buscape/src/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
  
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BuscaPe',
       debugShowCheckedModeBanner: false,
-      home: ProductPage()
+      home: ProductPage(),
+      scaffoldMessengerKey: NotificationsService.messengerKey,
       // home: ZapatoDescPage()
     );
   }
