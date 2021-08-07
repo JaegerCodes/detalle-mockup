@@ -15,7 +15,7 @@ class ProductsProvider extends ChangeNotifier {
     //this.categorias = productsResp;
     print( resp );
 
-    notifyListeners();
+    // notifyListeners();
   }
 
 }
