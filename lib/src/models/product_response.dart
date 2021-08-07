@@ -103,34 +103,34 @@ class Source {
 
 class Item {
     Item({
-        required this.itemId,
-        required this.name,
-        required this.nameComplete,
-        required this.complementName,
-        required this.ean,
-        required this.referenceId,
-        required this.measurementUnit,
-        required this.unitMultiplier,
-        required this.modalType,
-        required this.isKit,
-        required this.images,
-        required this.color,
-        required this.talla,
+        this.itemId,
+        this.name,
+        this.nameComplete,
+        this.complementName,
+        this.ean,
+        this.referenceId,
+        this.measurementUnit,
+        this.unitMultiplier,
+        this.modalType,
+        this.isKit,
+        this.images,
+        this.color,
+        this.talla,
     });
 
-    String itemId;
-    String name;
-    String nameComplete;
-    String complementName;
-    String ean;
-    List<ReferenceId> referenceId;
-    String measurementUnit;
-    int unitMultiplier;
-    String modalType;
-    bool isKit;
-    List<Image> images;
-    List<String> color;
-    List<String> talla;
+    String? itemId;
+    String? name;
+    String? nameComplete;
+    String? complementName;
+    String? ean;
+    List<ReferenceId>? referenceId;
+    String? measurementUnit;
+    int? unitMultiplier;
+    String? modalType;
+    bool? isKit;
+    List<Image>? images;
+    List<String>? color;
+    List<String>? talla;
 
     factory Item.fromJson(String str) => Item.fromMap(json.decode(str));
 
@@ -158,14 +158,14 @@ class Item {
         "nameComplete": nameComplete,
         "complementName": complementName,
         "ean": ean,
-        "referenceId": List<dynamic>.from(referenceId.map((x) => x.toMap())),
+        "referenceId": List<dynamic>.from(referenceId!.map((x) => x.toMap())),
         "measurementUnit": measurementUnit,
         "unitMultiplier": unitMultiplier,
         "modalType": modalType,
         "isKit": isKit,
-        "images": List<dynamic>.from(images.map((x) => x.toMap())),
-        "Color": List<dynamic>.from(color.map((x) => x)),
-        "Talla": List<dynamic>.from(talla.map((x) => x)),
+        "images": List<dynamic>.from(images!.map((x) => x.toMap())),
+        "Color": List<dynamic>.from(color!.map((x) => x)),
+        "Talla": List<dynamic>.from(talla!.map((x) => x)),
     };
 }
 
