@@ -54,7 +54,7 @@ class ProductDescPage extends StatelessWidget {
               ),
               _MontoBuyNow(),
               _ColoresYmas(),
-              ProductoSizeList(),
+              ProductSizeList(),
               _BotonesLikeCartSettings()
             ],
           ),

@@ -2,7 +2,7 @@ import 'package:buscape/src/models/zapato_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProductoSizeList extends StatelessWidget {
+class ProductSizeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
