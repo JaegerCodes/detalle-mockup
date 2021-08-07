@@ -28,7 +28,7 @@ class ZapatoSizePreview extends StatelessWidget {
         ),
         child: Container(
           width: double.infinity,
-          height: (this.fullScreen) ? 410 : 430,
+          // height: (this.fullScreen) ? 410 : 430,
           decoration: BoxDecoration(
             color: Color(0xffFFCF53),
             borderRadius: 
@@ -42,16 +42,7 @@ class ZapatoSizePreview extends StatelessWidget {
             
             
           ),
-          child: Column(
-            children: <Widget>[
-
-              // Zapato con su sombra
-              _ZapatoConSombra(),
-
-              if (!this.fullScreen)
-                _ZapatoTallas() 
-            ],
-          ),
+          child: _ZapatoConSombra(),
         ),
       ),
     );

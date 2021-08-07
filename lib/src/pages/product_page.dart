@@ -28,15 +28,8 @@ class ProductPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
 
-                    Hero(
-                      tag: 'zapato-1',
-                      child: ZapatoSizePreview()
-                    ),
-
-                    ZapatoDescripcion(
-                      titulo: 'Nike Air Max 720',
-                      descripcion: "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
-                    ),
+                    ProductCardItem(tag: 'zapato-1', title: 'Nike Air Max 720',),
+                    ProductCardItem(tag: 'zapato-2', title: 'Nike Air Max 721',),
 
                 ],
               ),
@@ -48,5 +41,34 @@ class ProductPage extends StatelessWidget {
         ],
       ),
    );
+  }
+}
+
+class ProductCardItem extends StatelessWidget {
+
+  final String? tag;
+  final String? title;
+  //final String? description;
+
+  const ProductCardItem({
+    Key? key, required this.tag, required this.title,
+  }) : super(key: key);
+  // 'zapato-1'
+  // 'title' 'Nike Air Max 720'
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Hero(
+          tag: tag!,
+          child: ZapatoSizePreview()
+        ),
+
+        ZapatoDescripcion(
+          titulo: title!,
+          descripcion: "",
+        ),
+      ],
+    );
   }
 }
