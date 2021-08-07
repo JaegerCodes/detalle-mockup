@@ -36,7 +36,8 @@ class ProductListItem extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Zapatilla Nike"),
+                    Text("NIKE"),
+                    Text("Zapatilla Jordan"),
                     Text("Desde S/ 10"),
                   ]),
             ),
