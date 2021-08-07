@@ -6,8 +6,13 @@ class ProductIcon extends StatelessWidget {
   final double size;
   final bool fullPage;
   final String tag;
+  final String? url;
 
-  ProductIcon({this.size = 0.0, this.fullPage = false, required this.tag});
+  ProductIcon(
+      {this.size = 0.0,
+      this.fullPage = false,
+      required this.tag,
+      required this.url});
   @override
   Widget build(BuildContext context) {
     final zapatoModel = Provider.of<ProductModel>(context);
@@ -27,11 +32,17 @@ class ProductIcon extends StatelessWidget {
             padding: EdgeInsets.all(this.fullPage ? 20 : size / 8),
             child: Stack(
               children: <Widget>[
-                Image(
-                  image: AssetImage(zapatoModel.assetImage),
-                  width: this.fullPage ? null : size,
-                  height: this.fullPage ? null : size,
-                )
+                url == null
+                    ? Image(
+                        image: AssetImage(zapatoModel.assetImage),
+                        width: this.fullPage ? null : size,
+                        height: this.fullPage ? null : size,
+                      )
+                    : Image.network(
+                        'https://picsum.photos/250?image=9',
+                        width: this.fullPage ? null : size,
+                        height: this.fullPage ? null : size,
+                      )
               ],
             )));
   }

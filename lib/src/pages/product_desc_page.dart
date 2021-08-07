@@ -27,6 +27,9 @@ class ProductDescPage extends StatelessWidget {
         Stack(
           children: <Widget>[
             ProductIcon(
+              url: (data.images?.length ?? 0) > 0
+                  ? data.images!.first.imageUrl
+                  : null,
               tag: tag,
               size: 0,
               fullPage: true,

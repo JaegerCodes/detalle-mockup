@@ -6,9 +6,9 @@ import 'package:buscape/src/widgets/product_icon.dart';
 class ProductListItem extends StatelessWidget {
   final String title;
   final String tag;
-  final Item? data;
+  final Item data;
 
-  ProductListItem({required this.tag, this.title = "", this.data});
+  ProductListItem({required this.tag, this.title = "", required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,9 @@ class ProductListItem extends StatelessWidget {
             ProductIcon(
               tag: tag,
               size: 100,
+              url: (data.images?.length ?? 0) > 0
+                  ? data.images!.first.imageUrl
+                  : null,
             ),
             Expanded(
                 child: Container(
