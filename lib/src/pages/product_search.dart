@@ -1,8 +1,8 @@
 import 'package:buscape/src/widgets/agregar_carrito.dart';
 import 'package:buscape/src/widgets/custom_appbar.dart';
 import 'package:buscape/src/widgets/product_list_item.dart';
-import 'package:buscape/src/widgets/zapato_desc.dart';
-import 'package:buscape/src/widgets/zapato_size.dart';
+import 'package:buscape/src/widgets/product_description.dart';
+import 'package:buscape/src/widgets/product_size.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
 

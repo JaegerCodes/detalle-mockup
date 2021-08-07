@@ -5,11 +5,11 @@ import 'package:buscape/src/pages/product_desc_page.dart';
 
 
 
-class ZapatoSizePreview extends StatelessWidget {
+class ProductSizePreview extends StatelessWidget {
   
   final bool fullScreen;
 
-  ZapatoSizePreview({ 
+  ProductSizePreview({ 
     this.fullScreen = false
   });
 

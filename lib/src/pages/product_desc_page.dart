@@ -1,8 +1,8 @@
 
 import 'package:animate_do/animate_do.dart';
 import 'package:buscape/src/widgets/boton_naranja.dart';
-import 'package:buscape/src/widgets/zapato_desc.dart';
-import 'package:buscape/src/widgets/zapato_size.dart';
+import 'package:buscape/src/widgets/product_description.dart';
+import 'package:buscape/src/widgets/product_size.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:buscape/src/helpers/helpers.dart';
@@ -25,7 +25,7 @@ class ProductDescPage extends StatelessWidget {
 
               Hero(
                 tag: 'zapato-1',
-                child: ZapatoSizePreview( fullScreen: true )
+                child: ProductSizePreview( fullScreen: true )
               ),
 
               Positioned(
@@ -51,7 +51,7 @@ class ProductDescPage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   
-                  ZapatoDescripcion(
+                  ProductDescription(
                       titulo: 'Nike Air Max 720',
                       descripcion: "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
                   ),

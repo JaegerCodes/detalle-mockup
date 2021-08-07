@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ZapatoDescripcion extends StatelessWidget {
+class ProductDescription extends StatelessWidget {
   
   final String titulo;
   final String descripcion;
 
-  const ZapatoDescripcion({
+  const ProductDescription({
     required this.titulo,
     required this.descripcion
   });
