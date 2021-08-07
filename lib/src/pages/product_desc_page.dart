@@ -45,7 +45,7 @@ class ProductDescPage extends StatelessWidget {
                 titulo: data.productName,
                 descripcion: "",
               ),
-              _AmountBuyNow(),
+              _AmountBuyNow(data.minPurchaseAmount),
               ColorsAndMore(),
               ProductSizeList(),
               _ButtonsLikeCartSettings()
@@ -103,6 +103,8 @@ class _BotonSombreado extends StatelessWidget {
 }
 
 class _AmountBuyNow extends StatelessWidget {
+  final double amount;
+  const _AmountBuyNow(this.amount);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -111,13 +113,13 @@ class _AmountBuyNow extends StatelessWidget {
         margin: EdgeInsets.only(top: 20, bottom: 20),
         child: Row(
           children: <Widget>[
-            Text('\$180.0',
+            Text('Desde S/.' + amount.toStringAsFixed(2),
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
             Spacer(),
             Bounce(
                 delay: Duration(seconds: 1),
                 from: 8,
-                child: ButtonThemed(texto: 'Buy now', ancho: 120, alto: 40))
+                child: ButtonThemed(texto: 'Comprar', ancho: 120, alto: 40))
           ],
         ),
       ),

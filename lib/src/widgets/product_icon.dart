@@ -39,7 +39,7 @@ class ProductIcon extends StatelessWidget {
                         height: this.fullPage ? null : size,
                       )
                     : Image.network(
-                        'https://picsum.photos/250?image=9',
+                        url!,
                         width: this.fullPage ? null : size,
                         height: this.fullPage ? null : size,
                       )

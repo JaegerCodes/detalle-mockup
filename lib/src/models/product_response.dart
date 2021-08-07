@@ -38,7 +38,7 @@ class Item {
   factory Item.fromMap(Map<String, dynamic> json) => Item(
         productId: json["productId"],
         productName: json["productName"],
-        minPurchaseAmount: json["minPurchaseAmount"],
+        minPurchaseAmount: (json["minPurchaseAmount"] as num).toDouble(),
         outfitPart: json["outfitPart"],
         presentations: List<Presentation>.from(
             json["presentations"].map((x) => Presentation.fromMap(x))),
@@ -61,7 +61,7 @@ class Presentation {
   List<String> imageUrls;
 
   factory Presentation.fromMap(Map<String, dynamic> json) => Presentation(
-        price: json["price"],
+        price: (json["price"] as num).toDouble(),
         color: json["color"] == null
             ? null
             : ColorParser.hex(json["color"]).getColor(),
