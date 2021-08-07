@@ -1,10 +1,10 @@
 import 'package:buscape/src/widgets/boton_naranja.dart';
 import 'package:flutter/material.dart';
 
-class AgregarCarritoBoton extends StatelessWidget {
+class AddCartButton extends StatelessWidget {
   final double monto;
 
-  AgregarCarritoBoton({required this.monto});
+  AddCartButton({required this.monto});
 
   @override
   Widget build(BuildContext context) {

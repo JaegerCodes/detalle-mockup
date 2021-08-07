@@ -1,4 +1,4 @@
-import 'package:buscape/src/widgets/agregar_carrito.dart';
+import 'package:buscape/src/widgets/add_to_cart.dart';
 import 'package:buscape/src/widgets/custom_appbar.dart';
 import 'package:buscape/src/widgets/product_description.dart';
 import 'package:buscape/src/widgets/product_icon.dart';
@@ -37,7 +37,7 @@ class ProductPage extends StatelessWidget {
               ],
             ),
           )),
-          AgregarCarritoBoton(monto: 180.0)
+          AddCartButton(monto: 180.0)
         ],
       ),
     );

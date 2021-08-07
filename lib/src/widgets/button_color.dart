@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:buscape/src/models/zapato_model.dart';
+import 'package:buscape/src/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class ButtonColor extends StatelessWidget {
       duration: Duration(milliseconds: 300),
       child: GestureDetector(
         onTap: () {
-          final zapatoModel = Provider.of<ZapatoModel>(context, listen: false);
+          final zapatoModel = Provider.of<ProductModel>(context, listen: false);
           zapatoModel.assetImage = this.urlImagen;
         },
         child: Container(
