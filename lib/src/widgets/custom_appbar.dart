@@ -1,3 +1,4 @@
+import 'package:buscape/src/pages/zapato_desc_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,10 +23,14 @@ class CustomAppBar extends StatelessWidget {
           width: double.infinity,
           child: Row(
             children: <Widget>[
-
-              Text( this.texto, style: TextStyle( fontSize: 30, fontWeight: FontWeight.w700 ), ),
+              if(this.texto.length>0)
+                Text( this.texto , style: TextStyle( fontSize: 30, fontWeight: FontWeight.w700 ), ),
+              if(this.texto.length==0)
+                Text( "Buscar..." , style: TextStyle( fontSize: 30, color: Colors.grey, fontWeight: FontWeight.w700 ), ),
               Spacer(),
-              Icon( Icons.search, size: 30 )
+              GestureDetector(child: Icon( Icons.search, size: 30 ), onTap: (){
+                Navigator.push(context,  MaterialPageRoute(builder: (BuildContext context) => ZapatoDescPage() ) );
+              },) 
 
             ],
           ),

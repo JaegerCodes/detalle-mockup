@@ -19,7 +19,7 @@ class ZapatoPage extends StatelessWidget {
       // body: ZapatoSizePreview(),
       body: Column(
         children: <Widget>[
-          CustomAppBar( texto: 'For you' ),
+          CustomAppBar( texto: '' ),
           SizedBox( height: 20),
 
           Expanded(
