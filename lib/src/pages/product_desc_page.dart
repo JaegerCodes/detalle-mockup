@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:buscape/src/helpers/palette.dart';
 import 'package:buscape/src/models/product_model.dart';
 import 'package:buscape/src/models/product_response.dart';
+import 'package:buscape/src/services/notifications_service.dart';
 import 'package:buscape/src/widgets/button_themed.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/oeschle_app_bar.dart';
@@ -9,12 +11,15 @@ import 'package:buscape/src/widgets/product_icon.dart';
 import 'package:buscape/src/widgets/product_size_list.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class ProductDescPage extends StatelessWidget {
   final String tag;
   final Item data;
   const ProductDescPage({required this.tag, required this.data});
+
+  static const platform = const MethodChannel("archannel");
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +56,21 @@ class ProductDescPage extends StatelessWidget {
             child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              GestureDetector(
+                  onTap: () async {
+                    await platform.invokeMethod("startAR");
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Palette.onPrimary,
+                    ),
+                    child: Text(
+                      'Probármelo!',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )),
               ProductDescription(
                 titulo: data.productName,
                 descripcion: "",
