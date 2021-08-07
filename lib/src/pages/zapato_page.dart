@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
 
 
-class ZapatoPage extends StatelessWidget {
+class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

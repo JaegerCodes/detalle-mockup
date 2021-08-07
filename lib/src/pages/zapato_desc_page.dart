@@ -9,7 +9,7 @@ import 'package:buscape/src/helpers/helpers.dart';
 import 'package:buscape/src/models/zapato_model.dart';
 
 
-class ZapatoDescPage extends StatelessWidget {
+class ProductDescPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

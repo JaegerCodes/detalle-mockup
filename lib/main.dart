@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BuscaPe',
       debugShowCheckedModeBanner: false,
-      home: ZapatoPage()
+      home: ProductPage()
       // home: ZapatoDescPage()
     );
   }

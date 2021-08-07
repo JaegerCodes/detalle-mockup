@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
                 Text( "Buscar..." , style: TextStyle( fontSize: 30, color: Colors.grey, fontWeight: FontWeight.w700 ), ),
               Spacer(),
               GestureDetector(child: Icon( Icons.search, size: 30 ), onTap: (){
-                Navigator.push(context,  MaterialPageRoute(builder: (BuildContext context) => ZapatoDescPage() ) );
+                Navigator.push(context,  MaterialPageRoute(builder: (BuildContext context) => ProductDescPage() ) );
               },) 
 
             ],

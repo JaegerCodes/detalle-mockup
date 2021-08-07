@@ -18,7 +18,7 @@ class ZapatoSizePreview extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         if ( !this.fullScreen ) {
-          Navigator.push(context,  MaterialPageRoute(builder: (BuildContext context) => ZapatoDescPage() ) );
+          Navigator.push(context,  MaterialPageRoute(builder: (BuildContext context) => ProductDescPage() ) );
         }
       },
       child: Padding(
