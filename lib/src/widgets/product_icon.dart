@@ -39,7 +39,7 @@ class ProductIcon extends StatelessWidget {
   }
 
   Widget onFullPage(ProductModel productModel) {
-    Widget clothe = url == null
+    Widget singleImage = url == null
     ? Image(
         image: AssetImage(productModel.assetImage),
         width: this.fullPage ? null : size,
@@ -51,38 +51,26 @@ class ProductIcon extends StatelessWidget {
         height: this.fullPage ? null : size,
     );
 
-    Widget whenFullPage = clothe;
+    List<Widget> clothes = <Widget>[];
 
-    if (this.fullPage) {
-
-      List<Widget> clothes = <Widget>[];
-
-      for (var i = 0; i < productModel.presentation.imageUrls.length; ++i) {
-          clothes.add(
-            Image.network(
-              productModel.presentation.imageUrls[i],
-              width: this.fullPage ? null : size,
-              height: this.fullPage ? null : size,
-            )
-          );
-      } 
-
-
-      whenFullPage = CarouselClothes(clothes: clothes,);
-    
-    
-    
+    for (var i = 0; i < productModel.presentation.imageUrls.length; ++i) {
+      String currentUrl = productModel.presentation.imageUrls[i];
+      Widget currentWidget = Image.network(
+          currentUrl,
+          width: this.fullPage ? null : size,
+          height: this.fullPage ? null : size,
+      );
+      clothes.add(currentWidget);
     }
-    return whenFullPage;
+    
+
+    return fullPage? CarouselClothes(clothes) : singleImage;
   }
 }
 
 class CarouselClothes extends StatefulWidget {
-
-  final List<Widget>? clothes;
-
-
-  CarouselClothes({Key? key, required this.clothes}) : super(key: key);
+  final List<Widget> clothes;
+  CarouselClothes(this.clothes);
 
   @override
   _CarouselClothesState createState() => _CarouselClothesState();
@@ -92,25 +80,27 @@ class _CarouselClothesState extends State<CarouselClothes> {
   CarouselController buttonCarouselController = CarouselController();
 
  @override
-  Widget build(BuildContext context) => Column(
-    children: <Widget>[
-      CarouselSlider(
-        items: widget.clothes,
-        carouselController: buttonCarouselController,
-        options: CarouselOptions(
-          autoPlay: false,
-          enlargeCenterPage: true,
-          viewportFraction: 0.9,
-          aspectRatio: 1.0,
-          initialPage: 0,
-          enableInfiniteScroll: false
+  Widget build(BuildContext context) {
+    
+    return Column(
+      children: <Widget>[
+        CarouselSlider(
+          items: widget.clothes,
+          carouselController: buttonCarouselController,
+          options: CarouselOptions(
+            autoPlay: false,
+            enlargeCenterPage: true,
+            viewportFraction: 0.9,
+            initialPage: 0,
+            enableInfiniteScroll: false,
+          ),
         ),
-      ),
-      ElevatedButton(
-        onPressed: () => buttonCarouselController.nextPage(
-            duration: Duration(milliseconds: 300), curve: Curves.linear),
-        child: Text('→'),
-      )
-    ]
-  );
+        ElevatedButton(
+          onPressed: () => buttonCarouselController.nextPage(
+              duration: Duration(milliseconds: 300), curve: Curves.linear),
+          child: Text('→'),
+        )
+      ]
+    );
+  }
 }
