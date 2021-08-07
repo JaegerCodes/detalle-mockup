@@ -1,3 +1,4 @@
+import 'package:buscape/src/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 
 class ButtonThemed extends StatelessWidget {
@@ -15,7 +16,9 @@ class ButtonThemed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {},
+        onTap: () {
+          NotificationsService.showSnackbar('Estamos trabajando en eso');
+        },
         child: Container(
           alignment: Alignment.center,
           width: this.ancho,
