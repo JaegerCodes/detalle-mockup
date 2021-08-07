@@ -16,7 +16,7 @@ class ProductPage extends StatelessWidget {
       body: Column(
         children: <Widget>[
           OeschleAppBar(isRoot: true, title: "Tienda Oeschle"),
-          CustomAppBar(
+          SearchBar(
             texto: '',
             readonly: true,
           ),

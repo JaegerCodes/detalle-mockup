@@ -15,7 +15,7 @@ class ProductSearch extends StatelessWidget {
       body: Column(
         children: <Widget>[
           OeschleAppBar(title: "Búsqueda de producto"),
-          CustomAppBar(
+          SearchBar(
             texto: '',
             readonly: false,
           ),

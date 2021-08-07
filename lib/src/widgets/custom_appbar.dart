@@ -1,11 +1,11 @@
 import 'package:buscape/src/pages/product_search.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
+class SearchBar extends StatelessWidget {
   final String texto;
   final bool readonly;
 
-  CustomAppBar({
+  SearchBar({
     required this.texto,
     required this.readonly,
   });
@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget {
       top: true,
       bottom: false,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         child: Container(
           width: double.infinity,
           child: Row(

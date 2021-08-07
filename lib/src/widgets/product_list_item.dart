@@ -22,14 +22,14 @@ class ProductListItem extends StatelessWidget {
           color: Colors.transparent,
         ),
         padding: EdgeInsets.symmetric(
-          horizontal: 25,
+          horizontal: 20,
           vertical: 5,
         ),
         child: Row(
           children: [
             ProductIcon(
               tag: tag,
-              size: 80,
+              size: 100,
             ),
             Container(
               padding: EdgeInsets.all(20),
