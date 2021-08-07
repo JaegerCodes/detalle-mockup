@@ -3,6 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:buscape/src/widgets/boton_naranja.dart';
 import 'package:buscape/src/widgets/product_description.dart';
 import 'package:buscape/src/widgets/product_size.dart';
+import 'package:buscape/src/widgets/product_size_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:buscape/src/helpers/helpers.dart';
@@ -59,6 +60,8 @@ class ProductDescPage extends StatelessWidget {
                   _MontoBuyNow(),
 
                   _ColoresYmas(),
+
+                  ProductoSizeList(),
 
                   _BotonesLikeCartSettings()
 
