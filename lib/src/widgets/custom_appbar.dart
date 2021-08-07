@@ -16,45 +16,46 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: false,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Container(
-          width: double.infinity,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                  child: readonly
-                      ? GestureDetector(
-                          onTap: () {
-                            pushSearchScreen(context);
-                          },
-                          child: Text(
-                            this.texto.length == 0 ? 'Buscar...' : this.texto,
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        )
-                      : TextField(
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            hintText: 'Buscar...',
-                          ),
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 20,
+        right: 20,
+        top: 15,
+        bottom: 10,
+      ),
+      child: Container(
+        width: double.infinity,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+                child: readonly
+                    ? GestureDetector(
+                        onTap: () {
+                          pushSearchScreen(context);
+                        },
+                        child: Text(
+                          this.texto.length == 0 ? 'Buscar...' : this.texto,
                           style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w700),
-                        )),
-              GestureDetector(
-                child: Icon(Icons.search, size: 30),
-                onTap: () {
-                  pushSearchScreen(context);
-                },
-              )
-            ],
-          ),
+                              fontSize: 30,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      )
+                    : TextField(
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          hintText: 'Buscar...',
+                        ),
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w700),
+                      )),
+            GestureDetector(
+              child: Icon(Icons.search, size: 30),
+              onTap: () {
+                pushSearchScreen(context);
+              },
+            )
+          ],
         ),
       ),
     );
