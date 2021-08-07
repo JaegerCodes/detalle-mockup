@@ -48,9 +48,6 @@ class ProductSizeButton extends StatelessWidget {
       onTap: () {
         final productModel = Provider.of<ProductModel>(context, listen: false);
         productModel.size = this.size;
-
-        // print(productModel.data.presentations.first.imageUrls);
-        productModel.setPresentation();
       },
       child: Container(
         alignment: Alignment.center,

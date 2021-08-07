@@ -33,7 +33,17 @@ class ProductIcon extends StatelessWidget {
             padding: EdgeInsets.all(this.fullPage ? 20 : size / 8),
             child: Stack(
               children: <Widget> [
-                onFullPage(productModel)
+                url == null
+                ? Image(
+                    image: AssetImage(productModel.assetImage),
+                    width: this.fullPage ? null : size,
+                    height: this.fullPage ? null : size,
+                )
+                : Image.network(
+                    url!,
+                    width: this.fullPage ? null : size,
+                    height: this.fullPage ? null : size,
+                )
               ],
             )));
   }
