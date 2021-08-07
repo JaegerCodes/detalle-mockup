@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BotonNaranja extends StatelessWidget {
+class ButtonThemed extends StatelessWidget {
   final String texto;
   final double alto;
   final double ancho;
   final Color color;
 
-  BotonNaranja(
+  ButtonThemed(
       {required this.texto,
       this.alto = 50,
       this.ancho = 150,

@@ -1,13 +1,12 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:buscape/src/widgets/boton_naranja.dart';
+import 'package:buscape/src/widgets/button_themed.dart';
+import 'package:buscape/src/widgets/button_color.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/product_description.dart';
 import 'package:buscape/src/widgets/product_icon.dart';
 import 'package:buscape/src/widgets/product_size_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:buscape/src/helpers/helpers.dart';
-import 'package:buscape/src/models/zapato_model.dart';
 
 class ProductDescPage extends StatelessWidget {
   final String tag;
@@ -122,53 +121,26 @@ class _ColorsAndMore extends StatelessWidget {
             children: <Widget>[
               Positioned(
                   left: 90,
-                  child: _BotonColor(
+                  child: ButtonColor(
                       Color(0xffC6D642), 4, 'assets/imgs/verde.png')),
               Positioned(
                   left: 60,
-                  child: _BotonColor(
+                  child: ButtonColor(
                       Color(0xffFFAD29), 3, 'assets/imgs/amarillo.png')),
               Positioned(
                   left: 30,
-                  child: _BotonColor(
+                  child: ButtonColor(
                       Color(0xff2099F1), 2, 'assets/imgs/azul.png')),
-              _BotonColor(Color(0xff364D56), 1, 'assets/imgs/negro.png'),
+              ButtonColor(Color(0xff364D56), 1, 'assets/imgs/negro.png'),
             ],
           )),
-          BotonNaranja(
+          ButtonThemed(
             texto: 'More related items',
             alto: 30,
             ancho: 170,
             color: Color(0xffFFC675),
           )
         ],
-      ),
-    );
-  }
-}
-
-class _BotonColor extends StatelessWidget {
-  final Color color;
-  final int index;
-  final String urlImagen;
-
-  const _BotonColor(this.color, this.index, this.urlImagen);
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeInLeft(
-      delay: Duration(milliseconds: this.index * 100),
-      duration: Duration(milliseconds: 300),
-      child: GestureDetector(
-        onTap: () {
-          final zapatoModel = Provider.of<ZapatoModel>(context, listen: false);
-          zapatoModel.assetImage = this.urlImagen;
-        },
-        child: Container(
-          width: 45,
-          height: 45,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        ),
       ),
     );
   }
@@ -189,7 +161,7 @@ class _AmountBuyNow extends StatelessWidget {
             Bounce(
                 delay: Duration(seconds: 1),
                 from: 8,
-                child: BotonNaranja(texto: 'Buy now', ancho: 120, alto: 40))
+                child: ButtonThemed(texto: 'Buy now', ancho: 120, alto: 40))
           ],
         ),
       ),

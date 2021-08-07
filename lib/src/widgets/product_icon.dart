@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:buscape/src/models/zapato_model.dart';
+import 'package:buscape/src/models/product_model.dart';
 
 class ProductIcon extends StatelessWidget {
   final double size;
@@ -10,7 +10,7 @@ class ProductIcon extends StatelessWidget {
   ProductIcon({this.size = 0.0, this.fullPage = false, required this.tag});
   @override
   Widget build(BuildContext context) {
-    final zapatoModel = Provider.of<ZapatoModel>(context);
+    final zapatoModel = Provider.of<ProductModel>(context);
 
     return Hero(
         tag: tag,
