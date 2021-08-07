@@ -34,26 +34,30 @@ class ProductDescPage extends StatelessWidget {
         OeschleAppBar(
           title: "Detalle del producto",
         ),
-        Stack(
-          children: <Widget>[
-            ProductIcon(
-              url: (data.presentations.length > 0 &&
-                      data.presentations.first.imageUrls.length > 0)
-                  ? data.presentations.first.imageUrls.first
-                  : null,
-              tag: tag,
-              size: 0,
-              fullPage: true,
-            ),
-          ],
-        ),
         Expanded(
             child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              ProductDescription(
-                titulo: data.productName,
-                descripcion: "",
+              /*ProductIcon(
+                url: (data.presentations.length > 0 &&
+                        data.presentations.first.imageUrls.length > 0)
+                    ? data.presentations.first.imageUrls.first
+                    : null,
+                tag: tag,
+                size: 0,
+                fullPage: true,
+              ),*/
+              // buildCarrousel(data.presentations.first.imageUrls),
+              Container(
+                height: 250,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: data.presentations.first.imageUrls.length,
+                  itemBuilder: (BuildContext context, int index) => Card(
+                        child: Image.network(data.presentations.first.imageUrls[index], fit: BoxFit.contain, width: 300),
+                      ),
+                ),
               ),
               _AmountBuyNow(data.minPurchaseAmount),
               ColorsAndMore(presentations: data.presentations),
@@ -64,6 +68,11 @@ class ProductDescPage extends StatelessWidget {
         ))
       ],
     ));
+  }
+
+  Widget buildCarrousel(List<String> urls) {
+    
+    return ImageSlider(imgList: urls);
   }
 }
 
