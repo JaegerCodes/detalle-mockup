@@ -1,47 +1,62 @@
 import 'package:buscape/src/helpers/palette.dart';
 import 'package:buscape/src/models/product_model.dart';
+import 'package:buscape/src/models/product_response.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductSizeList extends StatelessWidget {
+  final List<Presentation> presentations;
+
+  const ProductSizeList({Key? key, required this.presentations}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    // Set<String> colorSet = Set();
+    Set<String> sizeSet = Set();
+    presentations.forEach((element) {
+      sizeSet.add(element.size);
+    });
+    // List<Color> colors = colorSet.toList();
+    List<String> sizes = sizeSet.toList();
+    List<Widget> sizeButtons = <Widget> [];
+    for (var i = 0; i < sizes.length; ++i) {
+      sizeButtons.add(ProductSizeButton(size: sizes[i]));
+    }
+    final productModel = Provider.of<ProductModel>(context, listen: false);
+    productModel.initSize(sizes.first);
     return Padding(
       //padding: EdgeInsets.symmetric( horizontal: 30, vertical: 40),
       padding: EdgeInsets.only(left: 30, right: 30, top: 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          ProductSizeButton(numero: 'XS'),
-          ProductSizeButton(numero: 'S'),
-          ProductSizeButton(numero: 'M'),
-          ProductSizeButton(numero: 'L'),
-          ProductSizeButton(numero: 'XL'),
-        ],
+        children: sizeButtons
       ),
     );
   }
 }
 
 class ProductSizeButton extends StatelessWidget {
-  final String numero;
+  final String size;
 
-  const ProductSizeButton({required this.numero});
+  const ProductSizeButton({required this.size});
 
   @override
   Widget build(BuildContext context) {
-    final zapatoModel = Provider.of<ProductModel>(context);
+    final productModel = Provider.of<ProductModel>(context);
 
     return GestureDetector(
       onTap: () {
-        final zapatoModel = Provider.of<ProductModel>(context, listen: false);
-        zapatoModel.talla = this.numero;
+        final productModel = Provider.of<ProductModel>(context, listen: false);
+        productModel.size = this.size;
+
+        // print(productModel.data.presentations.first.imageUrls);
+        productModel.setPresentation();
       },
       child: Container(
         alignment: Alignment.center,
-        child: Text('$numero',
+        child: Text('$size',
             style: TextStyle(
-                color: (this.numero == zapatoModel.talla)
+                color: (this.size == productModel.size)
                     ? Colors.white
                     : Palette.onPrimary,
                 fontSize: 16,
@@ -49,13 +64,13 @@ class ProductSizeButton extends StatelessWidget {
         width: 45,
         height: 45,
         decoration: BoxDecoration(
-            color: (this.numero == zapatoModel.talla)
+            color: (this.size == productModel.size)
                 ? Palette.onPrimary
                 : Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                  color: this.numero == zapatoModel.talla
+                  color: this.size == productModel.size
                       ? Palette.onPrimary
                       : Colors.grey[400]!,
                   blurRadius: 10,

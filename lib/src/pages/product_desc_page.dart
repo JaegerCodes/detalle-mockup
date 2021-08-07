@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:buscape/src/models/product_model.dart';
 import 'package:buscape/src/models/product_response.dart';
 import 'package:buscape/src/widgets/button_themed.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
@@ -8,6 +9,7 @@ import 'package:buscape/src/widgets/product_icon.dart';
 import 'package:buscape/src/widgets/product_size_list.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
+import 'package:provider/provider.dart';
 
 class ProductDescPage extends StatelessWidget {
   final String tag;
@@ -17,6 +19,14 @@ class ProductDescPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     cambiarStatusLight();
+
+    /**
+     * final productModel = Provider.of<ProductModel>(context, listen: false);
+          productModel.assetImage = this.urlImagen;
+          productModel.color = this.color;
+     */
+    final productModel = Provider.of<ProductModel>(context, listen: false);
+    productModel.data = data;
 
     return Scaffold(
         body: Column(
@@ -47,7 +57,7 @@ class ProductDescPage extends StatelessWidget {
               ),
               _AmountBuyNow(data.minPurchaseAmount),
               ColorsAndMore(presentations: data.presentations),
-              ProductSizeList(),
+              ProductSizeList(presentations: data.presentations),
               _ButtonsLikeCartSettings()
             ],
           ),

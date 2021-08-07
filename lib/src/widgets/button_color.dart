@@ -17,8 +17,10 @@ class ButtonColor extends StatelessWidget {
       duration: Duration(milliseconds: 300),
       child: GestureDetector(
         onTap: () {
-          final zapatoModel = Provider.of<ProductModel>(context, listen: false);
-          zapatoModel.assetImage = this.urlImagen;
+          final productModel = Provider.of<ProductModel>(context, listen: false);
+          productModel.assetImage = this.urlImagen;
+          productModel.color = this.color;
+          productModel.setPresentation();
         },
         child: Container(
           width: 45,

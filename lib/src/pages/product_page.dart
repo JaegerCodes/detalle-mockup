@@ -1,13 +1,11 @@
 import 'package:buscape/src/api/BuscapeApi.dart';
 import 'package:buscape/src/models/product_response.dart';
-import 'package:buscape/src/providers/product_provider.dart';
 import 'package:buscape/src/widgets/add_to_cart.dart';
 import 'package:buscape/src/widgets/custom_appbar.dart';
 import 'package:buscape/src/widgets/oeschle_app_bar.dart';
 import 'package:buscape/src/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
-import 'package:provider/provider.dart';
 
 class ProductPage extends StatefulWidget {
   @override
@@ -54,9 +52,9 @@ class _ProductPageState extends State<ProductPage> {
             child: Column(
                 children: this
                     .products
-                    .map((e) => ProductListItem(
-                          tag: e.productId.toString(),
-                          data: e,
+                    .map((product) => ProductListItem(
+                          tag: product.productId.toString(),
+                          data: product,
                         ))
                     .toList()),
           )),
