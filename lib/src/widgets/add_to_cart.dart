@@ -1,4 +1,4 @@
-import 'package:buscape/src/widgets/boton_naranja.dart';
+import 'package:buscape/src/widgets/button_themed.dart';
 import 'package:flutter/material.dart';
 
 class AddCartButton extends StatelessWidget {
@@ -22,7 +22,7 @@ class AddCartButton extends StatelessWidget {
             Text('\$$monto',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
             Spacer(),
-            BotonNaranja(texto: 'Pagar'),
+            ButtonThemed(texto: 'Pagar'),
             SizedBox(width: 20)
           ],
         ),

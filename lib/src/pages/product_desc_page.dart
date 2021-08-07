@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:buscape/src/widgets/boton_naranja.dart';
+import 'package:buscape/src/widgets/button_themed.dart';
 import 'package:buscape/src/widgets/button_color.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/product_description.dart';
@@ -134,7 +134,7 @@ class _ColorsAndMore extends StatelessWidget {
               ButtonColor(Color(0xff364D56), 1, 'assets/imgs/negro.png'),
             ],
           )),
-          BotonNaranja(
+          ButtonThemed(
             texto: 'More related items',
             alto: 30,
             ancho: 170,
@@ -161,7 +161,7 @@ class _AmountBuyNow extends StatelessWidget {
             Bounce(
                 delay: Duration(seconds: 1),
                 from: 8,
-                child: BotonNaranja(texto: 'Buy now', ancho: 120, alto: 40))
+                child: ButtonThemed(texto: 'Buy now', ancho: 120, alto: 40))
           ],
         ),
       ),

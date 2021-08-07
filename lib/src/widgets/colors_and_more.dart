@@ -31,7 +31,7 @@ class ColorsAndMore extends StatelessWidget {
               ButtonColor(Color(0xff364D56), 1, 'assets/imgs/negro.png'),
             ],
           )),
-          BotonNaranja(
+          ButtonThemed(
             texto: 'More related items',
             alto: 30,
             ancho: 170,
