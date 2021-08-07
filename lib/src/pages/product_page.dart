@@ -1,7 +1,5 @@
 import 'package:buscape/src/widgets/add_to_cart.dart';
 import 'package:buscape/src/widgets/custom_appbar.dart';
-import 'package:buscape/src/widgets/product_description.dart';
-import 'package:buscape/src/widgets/product_icon.dart';
 import 'package:buscape/src/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';

@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:buscape/src/widgets/button_themed.dart';
-import 'package:buscape/src/widgets/button_color.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/product_description.dart';
 import 'package:buscape/src/widgets/product_icon.dart';
@@ -105,43 +104,6 @@ class _BotonSombreado extends StatelessWidget {
                 blurRadius: 20,
                 offset: Offset(0, 10))
           ]),
-    );
-  }
-}
-
-class _ColorsAndMore extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-              child: Stack(
-            children: <Widget>[
-              Positioned(
-                  left: 90,
-                  child: ButtonColor(
-                      Color(0xffC6D642), 4, 'assets/imgs/verde.png')),
-              Positioned(
-                  left: 60,
-                  child: ButtonColor(
-                      Color(0xffFFAD29), 3, 'assets/imgs/amarillo.png')),
-              Positioned(
-                  left: 30,
-                  child: ButtonColor(
-                      Color(0xff2099F1), 2, 'assets/imgs/azul.png')),
-              ButtonColor(Color(0xff364D56), 1, 'assets/imgs/negro.png'),
-            ],
-          )),
-          ButtonThemed(
-            texto: 'More related items',
-            alto: 30,
-            ancho: 170,
-            color: Color(0xffFFC675),
-          )
-        ],
-      ),
     );
   }
 }

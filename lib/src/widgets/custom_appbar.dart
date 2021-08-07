@@ -1,4 +1,3 @@
-import 'package:buscape/src/pages/product_desc_page.dart';
 import 'package:buscape/src/pages/product_search.dart';
 import 'package:flutter/material.dart';
 
