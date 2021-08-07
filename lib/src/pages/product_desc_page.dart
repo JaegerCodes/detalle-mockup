@@ -46,7 +46,7 @@ class ProductDescPage extends StatelessWidget {
                 descripcion: "",
               ),
               _AmountBuyNow(data.minPurchaseAmount),
-              ColorsAndMore(),
+              ColorsAndMore(presentations: data.presentations),
               ProductSizeList(),
               _ButtonsLikeCartSettings()
             ],

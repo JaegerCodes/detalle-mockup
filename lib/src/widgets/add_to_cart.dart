@@ -19,7 +19,7 @@ class AddCartButton extends StatelessWidget {
         child: Row(
           children: <Widget>[
             SizedBox(width: 20),
-            Text('\$$monto',
+            Text('S/${monto.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
             Spacer(),
             ButtonThemed(texto: 'Pagar'),

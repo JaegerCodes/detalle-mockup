@@ -47,7 +47,7 @@ class ProductListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(data.productName),
-                    ColorPalette(),
+                    ColorPalette(presentations: data.presentations),
                   ]),
             )),
           ],
@@ -58,21 +58,23 @@ class ProductListItem extends StatelessWidget {
 }
 
 class ColorPalette extends StatelessWidget {
+  final List<Presentation> presentations;
   const ColorPalette({
     Key? key,
+    required this.presentations,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Set<Color> colors = Set();
+    presentations.forEach((element) {
+      colors.add(element.color);
+    });
     return Container(
         padding: EdgeInsets.only(top: 5),
-        child: Row(
-          children: [
-            ColorPaletteButton(color: Color(0xff364D56)),
-            ColorPaletteButton(color: Color(0xff2099F1)),
-            ColorPaletteButton(color: Color(0xffFFAD29)),
-            ColorPaletteButton(color: Color(0xffC6D642)),
-          ],
+        child: Wrap(
+          children:
+              colors.map((color) => ColorPaletteButton(color: color)).toList(),
         ));
   }
 }

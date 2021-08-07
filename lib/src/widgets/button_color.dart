@@ -23,7 +23,10 @@ class ButtonColor extends StatelessWidget {
         child: Container(
           width: 45,
           height: 45,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+          decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.grey)),
         ),
       ),
     );

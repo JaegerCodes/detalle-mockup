@@ -60,7 +60,7 @@ class _ProductPageState extends State<ProductPage> {
                         ))
                     .toList()),
           )),
-          AddCartButton(monto: 180.0)
+          AddCartButton(monto: 0.0)
         ],
       ),
     );

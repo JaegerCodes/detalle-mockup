@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'dart:ui';
 import 'package:color_parser/color_parser.dart';
+import 'package:flutter/material.dart';
 
 class ProductsResponse {
   ProductsResponse({
@@ -48,14 +49,14 @@ class Item {
 class Presentation {
   Presentation({
     required this.price,
-    this.color,
+    required this.color,
     required this.size,
     this.outfitPart,
     required this.imageUrls,
   });
 
   double price;
-  Color? color;
+  Color color;
   String size;
   String? outfitPart;
   List<String> imageUrls;
@@ -63,8 +64,8 @@ class Presentation {
   factory Presentation.fromMap(Map<String, dynamic> json) => Presentation(
         price: (json["price"] as num).toDouble(),
         color: json["color"] == null
-            ? null
-            : ColorParser.hex(json["color"]).getColor(),
+            ? Colors.black
+            : ColorParser.hex(json["color"]).getColor()!,
         size: json["size"] ?? "M",
         outfitPart: json["outfitPart"],
         imageUrls: List<String>.from(json["imageUrls"]),
