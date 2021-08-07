@@ -1,4 +1,3 @@
-import 'package:buscape/src/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'button_color.dart';
