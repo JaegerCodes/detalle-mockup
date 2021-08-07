@@ -35,6 +35,7 @@ class Item {
   double minPurchaseAmount;
   String? outfitPart;
   List<Presentation> presentations;
+  //TODO: outfits
 
   factory Item.fromMap(Map<String, dynamic> json) => Item(
         productId: json["productId"],
