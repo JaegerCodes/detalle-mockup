@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: 'Buscar...',
                   ),
-                  style: TextStyle( fontSize: 30, color: Colors.grey, fontWeight: FontWeight.w700 ),
+                  style: TextStyle( fontSize: 30, fontWeight: FontWeight.w700 ),
                 )
               ),
               GestureDetector(child: Icon( Icons.search, size: 30 ), onTap: (){
