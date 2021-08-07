@@ -24,7 +24,7 @@ class _ProductPageState extends State<ProductPage> {
 
     //this.products = [...categoriesResp.categorias];
     setState(() {
-      this.products = productsResp.body.hits.hits.first.source.items;
+      this.products = productsResp.itemList;
     });
   }
 
@@ -55,7 +55,7 @@ class _ProductPageState extends State<ProductPage> {
                 children: this
                     .products
                     .map((e) => ProductListItem(
-                          tag: e.itemId.toString(),
+                          tag: e.productId.toString(),
                           data: e,
                         ))
                     .toList()),

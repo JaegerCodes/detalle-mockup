@@ -23,9 +23,7 @@ class _ProductSearchState extends State<ProductSearch> {
 
     //this.products = [...categoriesResp.categorias];
     setState(() {
-      this.products = productsResp.body.hits.hits.length > 0
-          ? productsResp.body.hits.hits.first.source.items
-          : [];
+      this.products = productsResp.itemList;
     });
   }
 
@@ -61,7 +59,7 @@ class _ProductSearchState extends State<ProductSearch> {
               children: this
                   .products
                   .map((e) => ProductListItem(
-                        tag: e.itemId.toString(),
+                        tag: e.productId.toString(),
                         data: e,
                       ))
                   .toList(),

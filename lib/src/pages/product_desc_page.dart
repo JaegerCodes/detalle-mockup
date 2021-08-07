@@ -27,8 +27,9 @@ class ProductDescPage extends StatelessWidget {
         Stack(
           children: <Widget>[
             ProductIcon(
-              url: (data.images?.length ?? 0) > 0
-                  ? data.images!.first.imageUrl
+              url: (data.presentations.length > 0 &&
+                      data.presentations.first.imageUrls.length > 0)
+                  ? data.presentations.first.imageUrls.first
                   : null,
               tag: tag,
               size: 0,
@@ -41,7 +42,7 @@ class ProductDescPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ProductDescription(
-                titulo: data.name!,
+                titulo: data.productName,
                 descripcion: "",
               ),
               _AmountBuyNow(),

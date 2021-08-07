@@ -13,14 +13,14 @@ class ProductListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(tag);
-    print(data?.name);
+    print(data.productName);
     return GestureDetector(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (BuildContext context) =>
-                    ProductDescPage(tag: tag, data: data!)));
+                    ProductDescPage(tag: tag, data: data)));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -35,8 +35,9 @@ class ProductListItem extends StatelessWidget {
             ProductIcon(
               tag: tag,
               size: 100,
-              url: (data.images?.length ?? 0) > 0
-                  ? data.images!.first.imageUrl
+              url: (data.presentations.length > 0 &&
+                      data.presentations.first.imageUrls.length > 0)
+                  ? data.presentations.first.imageUrls.first
                   : null,
             ),
             Expanded(
@@ -45,8 +46,7 @@ class ProductListItem extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(data?.name ?? ""),
-                    Text(data?.complementName ?? ""),
+                    Text(data.productName),
                     ColorPalette(),
                   ]),
             )),
