@@ -1,3 +1,4 @@
+import 'package:buscape/src/models/product_response.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/pages/product_desc_page.dart';
 import 'package:buscape/src/widgets/product_icon.dart';
@@ -5,11 +6,14 @@ import 'package:buscape/src/widgets/product_icon.dart';
 class ProductListItem extends StatelessWidget {
   final String title;
   final String tag;
+  final Item? data;
 
-  ProductListItem({required this.tag, this.title = ""});
+  ProductListItem({required this.tag, this.title = "", this.data});
 
   @override
   Widget build(BuildContext context) {
+    print(tag);
+    print(data?.name);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -31,17 +35,17 @@ class ProductListItem extends StatelessWidget {
               tag: tag,
               size: 100,
             ),
-            Container(
+            Expanded(
+                child: Container(
               padding: EdgeInsets.all(20),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text("NIKE"),
-                    Text("Zapatilla Jordan"),
-                    Text("Desde S/ 10"),
+                    Text(data?.name ?? ""),
+                    Text(data?.complementName ?? ""),
                     ColorPalette(),
                   ]),
-            ),
+            )),
           ],
         ),
       ),

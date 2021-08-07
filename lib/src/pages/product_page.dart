@@ -18,19 +18,22 @@ class _ProductPageState extends State<ProductPage> {
   List<Item> products = [];
 
   getProducts({String searchWord = 'chompa de mujer'}) async {
-    final resp = await BuscapeApi.httpGet('/products/catalog?searchWord=$searchWord');
+    final resp =
+        await BuscapeApi.httpGet('/products/catalog?searchWord=$searchWord');
     final productsResp = ProductsResponse.fromMap(resp);
 
     //this.products = [...categoriesResp.categorias];
-    this.products = productsResp.body.hits.hits.first.source.items;
-    setState(() {});
+    setState(() {
+      this.products = productsResp.body.hits.hits.first.source.items;
+    });
   }
 
   @override
-    void initState() {
-      super.initState();
-      products = Provider.of<ProductsProvider>(context, listen: false).products??[];
-    }
+  void initState() {
+    super.initState();
+    products =
+        Provider.of<ProductsProvider>(context, listen: false).products ?? [];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,20 +54,13 @@ class _ProductPageState extends State<ProductPage> {
               child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
-              children: <Widget>  [
-                if( products.isNotEmpty ) 
-                ...[
-                  ProductListItem(
-                  tag: 'zapato-1',
-                  title: 'Nike Air Max 720',
-                  ),
-                  ProductListItem(
-                    tag: 'zapato-2',
-                    title: 'Nike Air Max 721',
-                  ),
-                ],
-              ],
-            ),
+                children: this
+                    .products
+                    .map((e) => ProductListItem(
+                          tag: e.itemId.toString(),
+                          data: e,
+                        ))
+                    .toList()),
           )),
           AddCartButton(monto: 180.0)
         ],
