@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:buscape/src/widgets/boton_naranja.dart';
+import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/product_description.dart';
 import 'package:buscape/src/widgets/product_icon.dart';
 import 'package:buscape/src/widgets/product_size_list.dart';
@@ -52,10 +53,10 @@ class ProductDescPage extends StatelessWidget {
                 descripcion:
                     "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
               ),
-              _MontoBuyNow(),
-              _ColoresYmas(),
+              _AmountBuyNow(),
+              ColorsAndMore(),
               ProductSizeList(),
-              _BotonesLikeCartSettings()
+              _ButtonsLikeCartSettings()
             ],
           ),
         ))
@@ -64,7 +65,7 @@ class ProductDescPage extends StatelessWidget {
   }
 }
 
-class _BotonesLikeCartSettings extends StatelessWidget {
+class _ButtonsLikeCartSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -109,7 +110,7 @@ class _BotonSombreado extends StatelessWidget {
   }
 }
 
-class _ColoresYmas extends StatelessWidget {
+class _ColorsAndMore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -173,7 +174,7 @@ class _BotonColor extends StatelessWidget {
   }
 }
 
-class _MontoBuyNow extends StatelessWidget {
+class _AmountBuyNow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
