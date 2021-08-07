@@ -16,7 +16,7 @@ class ProductsProvider extends ChangeNotifier {
     this.products = productsResp.body.hits.hits.first.source.items;
     print( products );
 
-    // notifyListeners();
+    notifyListeners();
   }
 
 }

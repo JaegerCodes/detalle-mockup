@@ -1,3 +1,4 @@
+import 'package:buscape/src/api/BuscapeApi.dart';
 import 'package:buscape/src/models/product_response.dart';
 import 'package:buscape/src/providers/product_provider.dart';
 import 'package:buscape/src/widgets/add_to_cart.dart';
@@ -16,6 +17,15 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   List<Item> products = [];
 
+  getProducts({String searchWord = 'chompa de mujer'}) async {
+    final resp = await BuscapeApi.httpGet('/products/catalog?searchWord=$searchWord');
+    final productsResp = ProductsResponse.fromMap(resp);
+
+    //this.products = [...categoriesResp.categorias];
+    this.products = productsResp.body.hits.hits.first.source.items;
+    setState(() {});
+  }
+
   @override
     void initState() {
       super.initState();
@@ -25,7 +35,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     cambiarStatusDark();
-
+    getProducts();
     return Scaffold(
       // body: CustomAppBar( texto: 'For you' )
       // body: ZapatoSizePreview(),
@@ -42,14 +52,17 @@ class _ProductPageState extends State<ProductPage> {
             physics: BouncingScrollPhysics(),
             child: Column(
               children: <Widget>  [
-                ProductListItem(
+                if( products.isNotEmpty ) 
+                ...[
+                  ProductListItem(
                   tag: 'zapato-1',
                   title: 'Nike Air Max 720',
-                ),
-                ProductListItem(
-                  tag: 'zapato-2',
-                  title: 'Nike Air Max 721',
-                ),
+                  ),
+                  ProductListItem(
+                    tag: 'zapato-2',
+                    title: 'Nike Air Max 721',
+                  ),
+                ],
               ],
             ),
           )),
