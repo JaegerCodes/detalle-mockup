@@ -1,5 +1,6 @@
 import 'package:buscape/src/widgets/add_to_cart.dart';
 import 'package:buscape/src/widgets/custom_appbar.dart';
+import 'package:buscape/src/widgets/oeschle_app_bar.dart';
 import 'package:buscape/src/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
@@ -14,6 +15,7 @@ class ProductPage extends StatelessWidget {
       // body: ZapatoSizePreview(),
       body: Column(
         children: <Widget>[
+          OeschleAppBar(isRoot: true, title: "Tienda Oeschle"),
           CustomAppBar(
             texto: '',
             readonly: true,

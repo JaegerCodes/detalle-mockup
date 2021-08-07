@@ -16,7 +16,7 @@ class ProductIcon extends StatelessWidget {
         tag: tag,
         child: Container(
             decoration: BoxDecoration(
-                color: Color(0xffFFCF53),
+                color: Colors.transparent,
                 borderRadius: this.fullPage
                     ? BorderRadius.only(
                         bottomLeft: Radius.circular(40),

@@ -14,26 +14,20 @@ class ColorsAndMore extends StatelessWidget {
               child: Stack(
             children: <Widget>[
               Positioned(
-                  left: 90,
+                  left: 180,
                   child: ButtonColor(
                       Color(0xffC6D642), 4, 'assets/imgs/verde.png')),
               Positioned(
-                  left: 60,
+                  left: 120,
                   child: ButtonColor(
                       Color(0xffFFAD29), 3, 'assets/imgs/amarillo.png')),
               Positioned(
-                  left: 30,
+                  left: 60,
                   child: ButtonColor(
                       Color(0xff2099F1), 2, 'assets/imgs/azul.png')),
               ButtonColor(Color(0xff364D56), 1, 'assets/imgs/negro.png'),
             ],
           )),
-          ButtonThemed(
-            texto: 'More related items',
-            alto: 30,
-            ancho: 170,
-            color: Color(0xffFFC675),
-          )
         ],
       ),
     );

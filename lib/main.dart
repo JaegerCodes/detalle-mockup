@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'BuscaPe',
       debugShowCheckedModeBanner: false,
       home: ProductPage(),
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
       scaffoldMessengerKey: NotificationsService.messengerKey,
       // home: ZapatoDescPage()
     );

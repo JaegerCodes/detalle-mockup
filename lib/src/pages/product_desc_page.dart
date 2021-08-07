@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:buscape/src/widgets/button_themed.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
+import 'package:buscape/src/widgets/oeschle_app_bar.dart';
 import 'package:buscape/src/widgets/product_description.dart';
 import 'package:buscape/src/widgets/product_icon.dart';
 import 'package:buscape/src/widgets/product_size_list.dart';
@@ -18,6 +19,9 @@ class ProductDescPage extends StatelessWidget {
     return Scaffold(
         body: Column(
       children: <Widget>[
+        OeschleAppBar(
+          title: "Detalle del producto",
+        ),
         Stack(
           children: <Widget>[
             ProductIcon(
@@ -25,21 +29,6 @@ class ProductDescPage extends StatelessWidget {
               size: 0,
               fullPage: true,
             ),
-            Positioned(
-                top: 80,
-                child: FloatingActionButton(
-                  child:
-                      Icon(Icons.chevron_left, color: Colors.white, size: 60),
-                  onPressed: () {
-                    cambiarStatusDark();
-                    Navigator.pop(context);
-
-                    // @fernando_her85
-                  },
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  highlightElevation: 0,
-                ))
           ],
         ),
         Expanded(

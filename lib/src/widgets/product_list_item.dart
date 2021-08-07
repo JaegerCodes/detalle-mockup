@@ -39,11 +39,50 @@ class ProductListItem extends StatelessWidget {
                     Text("NIKE"),
                     Text("Zapatilla Jordan"),
                     Text("Desde S/ 10"),
+                    ColorPalette(),
                   ]),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class ColorPalette extends StatelessWidget {
+  const ColorPalette({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.only(top: 5),
+        child: Row(
+          children: [
+            ColorPaletteButton(color: Color(0xff364D56)),
+            ColorPaletteButton(color: Color(0xff2099F1)),
+            ColorPaletteButton(color: Color(0xffFFAD29)),
+            ColorPaletteButton(color: Color(0xffC6D642)),
+          ],
+        ));
+  }
+}
+
+class ColorPaletteButton extends StatelessWidget {
+  final Color color;
+  const ColorPaletteButton({
+    required this.color,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 30,
+      height: 30,
+      margin: EdgeInsets.only(right: 8),
+      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
     );
   }
 }

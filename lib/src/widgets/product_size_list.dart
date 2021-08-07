@@ -1,3 +1,4 @@
+import 'package:buscape/src/helpers/palette.dart';
 import 'package:buscape/src/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,21 +12,21 @@ class ProductSizeList extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _TallaZapatoCaja(numero: 'XS'),
-          _TallaZapatoCaja(numero: 'S'),
-          _TallaZapatoCaja(numero: 'M'),
-          _TallaZapatoCaja(numero: 'L'),
-          _TallaZapatoCaja(numero: 'XL'),
+          ProductSizeButton(numero: 'XS'),
+          ProductSizeButton(numero: 'S'),
+          ProductSizeButton(numero: 'M'),
+          ProductSizeButton(numero: 'L'),
+          ProductSizeButton(numero: 'XL'),
         ],
       ),
     );
   }
 }
 
-class _TallaZapatoCaja extends StatelessWidget {
+class ProductSizeButton extends StatelessWidget {
   final String numero;
 
-  const _TallaZapatoCaja({required this.numero});
+  const ProductSizeButton({required this.numero});
 
   @override
   Widget build(BuildContext context) {
@@ -42,22 +43,23 @@ class _TallaZapatoCaja extends StatelessWidget {
             style: TextStyle(
                 color: (this.numero == zapatoModel.talla)
                     ? Colors.white
-                    : Color(0xffF1A23A),
+                    : Palette.onPrimary,
                 fontSize: 16,
                 fontWeight: FontWeight.bold)),
         width: 45,
         height: 45,
         decoration: BoxDecoration(
             color: (this.numero == zapatoModel.talla)
-                ? Color(0xffF1A23A)
+                ? Palette.onPrimary
                 : Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              if (this.numero == zapatoModel.talla)
-                BoxShadow(
-                    color: Color(0xffF1A23A),
-                    blurRadius: 10,
-                    offset: Offset(0, 5))
+              BoxShadow(
+                  color: this.numero == zapatoModel.talla
+                      ? Palette.onPrimary
+                      : Colors.grey[400]!,
+                  blurRadius: 10,
+                  offset: Offset(0, 5))
             ]),
       ),
     );

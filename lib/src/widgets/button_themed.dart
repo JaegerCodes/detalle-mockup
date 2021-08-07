@@ -1,3 +1,4 @@
+import 'package:buscape/src/helpers/palette.dart';
 import 'package:buscape/src/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class ButtonThemed extends StatelessWidget {
       {required this.texto,
       this.alto = 50,
       this.ancho = 150,
-      this.color = Colors.orange});
+      this.color = Palette.onPrimary});
 
   @override
   Widget build(BuildContext context) {

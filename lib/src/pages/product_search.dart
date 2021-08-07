@@ -1,4 +1,5 @@
 import 'package:buscape/src/widgets/custom_appbar.dart';
+import 'package:buscape/src/widgets/oeschle_app_bar.dart';
 import 'package:buscape/src/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
@@ -13,6 +14,7 @@ class ProductSearch extends StatelessWidget {
       // body: ZapatoSizePreview(),
       body: Column(
         children: <Widget>[
+          OeschleAppBar(title: "Búsqueda de producto"),
           CustomAppBar(
             texto: '',
             readonly: false,
