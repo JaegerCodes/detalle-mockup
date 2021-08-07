@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
 
-class CafeApi {
+class BuscapeApi {
 
   static Dio _dio = new Dio();
   
