@@ -2,12 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:buscape/src/helpers/palette.dart';
 import 'package:buscape/src/models/product_model.dart';
 import 'package:buscape/src/models/product_response.dart';
-import 'package:buscape/src/services/notifications_service.dart';
 import 'package:buscape/src/widgets/button_themed.dart';
 import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/oeschle_app_bar.dart';
 import 'package:buscape/src/widgets/product_description.dart';
-import 'package:buscape/src/widgets/product_icon.dart';
 import 'package:buscape/src/widgets/product_size_list.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
@@ -93,7 +91,9 @@ class ProductDescPageState extends State<ProductDescPage> {
                       this.presentationIndex = index;
                     });
                   }),
-              ProductSizeList(presentations: widget.data.presentations),
+              ProductSizeList(
+                  presentations: widget.data.presentations,
+                  index: presentationIndex),
               _ButtonsLikeCartSettings()
             ],
           ),

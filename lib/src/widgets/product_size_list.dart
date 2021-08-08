@@ -6,19 +6,23 @@ import 'package:provider/provider.dart';
 
 class ProductSizeList extends StatelessWidget {
   final List<Presentation> presentations;
+  final int index;
 
-  const ProductSizeList({Key? key, required this.presentations}) : super(key: key);
+  const ProductSizeList(
+      {Key? key, required this.presentations, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Set<String> colorSet = Set();
     Set<String> sizeSet = Set();
     presentations.forEach((element) {
-      sizeSet.add(element.size);
+      if (element.color == presentations[index].color)
+        sizeSet.add(element.size);
     });
     // List<Color> colors = colorSet.toList();
     List<String> sizes = sizeSet.toList();
-    List<Widget> sizeButtons = <Widget> [];
+    List<Widget> sizeButtons = <Widget>[];
     for (var i = 0; i < sizes.length; ++i) {
       sizeButtons.add(ProductSizeButton(size: sizes[i]));
     }
@@ -28,9 +32,8 @@ class ProductSizeList extends StatelessWidget {
       //padding: EdgeInsets.symmetric( horizontal: 30, vertical: 40),
       padding: EdgeInsets.only(left: 30, right: 30, top: 40),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: sizeButtons
-      ),
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: sizeButtons),
     );
   }
 }
@@ -51,10 +54,8 @@ class _ProductSizeButtonState extends State<ProductSizeButton> {
 
     return GestureDetector(
       onTap: () {
-        
         final productModel = Provider.of<ProductModel>(context, listen: false);
         productModel.size = this.widget.size;
-        
       },
       child: Container(
         alignment: Alignment.center,

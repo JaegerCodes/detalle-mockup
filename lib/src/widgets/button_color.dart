@@ -1,7 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:buscape/src/models/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ButtonColor extends StatefulWidget {
   final Color color;
