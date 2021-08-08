@@ -33,8 +33,14 @@ class ProductDescPageState extends State<ProductDescPage> {
   static const platform = const MethodChannel("archannel");
 
   getOutfits() async {
-    if (!widget.fromOutfits /*&& widget.data.outfitItems != null*/) {
-
+    if (!widget.fromOutfits && widget.data.outfitItems != null) {
+      final id = widget.data.outfitItems!.first;
+      final resp = await BuscapeApi.httpGet('/products/$id');
+      if (resp.itemList.isNotEmpty) {
+        outfitContent = resp.itemList.first;
+        outfits = outfitContent!.presentations;
+      }
+      setState(() {});
       //final resp = await BuscapeApi.httpGet('/products/$id');
       /*final id = widget.data.outfitItems.first;
       final resp = await BuscapeApi.httpGet('/products/$id');
