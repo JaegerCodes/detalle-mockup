@@ -40,6 +40,7 @@ class ProductDescPageState extends State<ProductDescPage> {
         outfitContent = resp.itemList.first;
         outfits = outfitContent!.presentations;
       }
+      setState(() {});
       //final resp = await BuscapeApi.httpGet('/products/$id');
       /*final id = widget.data.outfitItems.first;
       final resp = await BuscapeApi.httpGet('/products/$id');
