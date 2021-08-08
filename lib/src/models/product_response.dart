@@ -28,7 +28,8 @@ class Item {
       required this.minPurchaseAmount,
       this.outfitPart,
       required this.presentations,
-      required this.outfitItems});
+      required this.outfitItems,
+      required this.outfitUrls});
 
   String productId;
   String productName;
@@ -36,6 +37,7 @@ class Item {
   String? outfitPart;
   List<Presentation> presentations;
   List<String>? outfitItems;
+  List<String>? outfitUrls;
 
   factory Item.fromMap(Map<String, dynamic> json) => Item(
         productId: json["productId"],
@@ -47,7 +49,9 @@ class Item {
         outfitItems: (json["outfitItems"] == null || json["outfitItems"] == "")
             ? []
             : List<String>.from(json["outfitItems"]),
-        //outfitItems: json["outfitItems"],
+        outfitUrls: (json["outfitUrls"] == null || json["outfitUrls"] == "")
+            ? []
+            : List<String>.from(json["outfitUrls"]),
       );
 }
 

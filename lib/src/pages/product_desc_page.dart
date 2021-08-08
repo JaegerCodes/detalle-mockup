@@ -28,6 +28,7 @@ class ProductDescPage extends StatefulWidget {
 class ProductDescPageState extends State<ProductDescPage> {
   int presentationIndex = 0;
   List<Presentation> outfits = [];
+  List<String> urls = [];
   Item? outfitContent;
 
   static const platform = const MethodChannel("archannel");
@@ -40,6 +41,8 @@ class ProductDescPageState extends State<ProductDescPage> {
       if (productsResp.itemList.isNotEmpty) {
           outfitContent = productsResp.itemList.first;
           outfits = outfitContent!.presentations;
+          if (outfitContent!.outfitUrls != null)
+            urls = outfitContent!.outfitUrls!;
       }
       setState(() {});
     }
@@ -98,7 +101,7 @@ class ProductDescPageState extends State<ProductDescPage> {
               ProductSizeList(
                   presentations: widget.data.presentations,
                   index: presentationIndex),
-              if (!widget.fromOutfits)
+              if (!widget.fromOutfits && outfitContent != null &&  outfitContent!.outfitUrls != null && outfitContent!.outfitUrls!.isNotEmpty)
               ...[
                 ProductDescription(
                   titulo: "Sugerencias",
@@ -138,7 +141,7 @@ class ProductDescPageState extends State<ProductDescPage> {
     print(presentations.first.imageUrls);
     if (presentations.isNotEmpty && presentations.first.imageUrls.isNotEmpty) {
       final slides = [
-        for(int index = 0; index < presentations.first.imageUrls.length; index++)
+        for(int index = 0; index < urls.length; index++)
           GestureDetector(
             onTap: () {
               if (outfitContent != null) {
@@ -151,7 +154,7 @@ class ProductDescPageState extends State<ProductDescPage> {
               }
             },
             child: Image.network(
-              presentations.first.imageUrls[index],
+              urls[index],
               fit: BoxFit.contain,
               width: 300),
           )
