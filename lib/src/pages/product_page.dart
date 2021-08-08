@@ -15,7 +15,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   List<Item> products = [];
 
-  getProducts({String searchWord = 'chompa de mujer'}) async {
+  getProducts({String searchWord = 'chompa'}) async {
     final resp =
         await BuscapeApi.httpGet('/products/catalog?searchWord=$searchWord');
     final productsResp = ProductsResponse.fromMap(resp);
