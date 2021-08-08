@@ -17,9 +17,6 @@ class _ProductSearchState extends State<ProductSearch> {
     final resp =
         await BuscapeApi.httpGet('/products/catalog?searchWord=$searchWord');
     final productsResp = ProductsResponse.fromMap(resp);
-    print(productsResp);
-
-    //this.products = [...categoriesResp.categorias];
     setState(() {
       this.products = productsResp.itemList;
     });
@@ -37,8 +34,6 @@ class _ProductSearchState extends State<ProductSearch> {
     cambiarStatusDark();
 
     return Scaffold(
-      // body: CustomAppBar( texto: 'For you' )
-      // body: ZapatoSizePreview(),
       body: Column(
         children: <Widget>[
           OeschleAppBar(title: "Búsqueda de producto"),

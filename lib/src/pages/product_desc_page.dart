@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:buscape/src/api/BuscapeApi.dart';
 import 'package:buscape/src/helpers/palette.dart';
 import 'package:buscape/src/models/product_model.dart';
 import 'package:buscape/src/models/product_response.dart';
@@ -7,6 +8,7 @@ import 'package:buscape/src/widgets/colors_and_more.dart';
 import 'package:buscape/src/widgets/oeschle_app_bar.dart';
 import 'package:buscape/src/widgets/product_description.dart';
 import 'package:buscape/src/widgets/product_size_list.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:buscape/src/helpers/helpers.dart';
 import 'package:flutter/services.dart';
@@ -15,8 +17,9 @@ import 'package:provider/provider.dart';
 class ProductDescPage extends StatefulWidget {
   final String tag;
   final Item data;
+  final bool fromOutfits;
 
-  const ProductDescPage({required this.tag, required this.data});
+  const ProductDescPage({required this.tag, required this.data, this.fromOutfits = false});
 
   @override
   ProductDescPageState createState() => ProductDescPageState();
@@ -24,18 +27,39 @@ class ProductDescPage extends StatefulWidget {
 
 class ProductDescPageState extends State<ProductDescPage> {
   int presentationIndex = 0;
+  List<Presentation> outfits = [];
+  Item? outfitContent;
 
   static const platform = const MethodChannel("archannel");
+
+  getOutfits() async {
+    if (!widget.fromOutfits){
+      final resp =
+          await BuscapeApi.httpGet('/products/${widget.data.productId}');
+      final productsResp = ProductsResponse.fromMap(resp);
+      if (productsResp.itemList.isNotEmpty) {
+        outfitContent = productsResp.itemList.first;
+        outfits = outfitContent!.presentations;
+      }
+      if (this.mounted) {
+        setState(() {});
+      }
+        
+    }
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    if(mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     cambiarStatusLight();
+    getOutfits();
 
-    /**
-     * final productModel = Provider.of<ProductModel>(context, listen: false);
-          productModel.assetImage = this.urlImagen;
-          productModel.color = this.color;
-     */
     final productModel = Provider.of<ProductModel>(context, listen: false);
     productModel.data = widget.data;
 
@@ -49,21 +73,7 @@ class ProductDescPageState extends State<ProductDescPage> {
             child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Container(
-                  height: 250,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: widget
-                        .data.presentations[presentationIndex].imageUrls.length,
-                    itemBuilder: (BuildContext context, int index) => Card(
-                      child: Image.network(
-                          widget.data.presentations[presentationIndex]
-                              .imageUrls[index],
-                          fit: BoxFit.contain,
-                          width: 300),
-                    ),
-                  )),
+              buildCarrousel(widget.data.presentations),
               GestureDetector(
                   onTap: () async {
                     await platform.invokeMethod("startAR");
@@ -75,7 +85,7 @@ class ProductDescPageState extends State<ProductDescPage> {
                       color: Palette.onPrimary,
                     ),
                     child: Text(
-                      'Probármelo!',
+                      'Pruébalo!',
                       style: TextStyle(color: Colors.white),
                     ),
                   )),
@@ -94,12 +104,68 @@ class ProductDescPageState extends State<ProductDescPage> {
               ProductSizeList(
                   presentations: widget.data.presentations,
                   index: presentationIndex),
+              if (!widget.fromOutfits)
+              ...[
+                ProductDescription(
+                  titulo: "Sugerencias",
+                  descripcion: "",
+                ),
+                if (outfits.isNotEmpty)
+                  buildOutFitCarrousel(outfits)
+              ],
               _ButtonsLikeCartSettings()
             ],
           ),
         ))
       ],
     ));
+  }
+
+  Widget buildCarrousel(List<Presentation> presentations) {
+
+    return presentations.isNotEmpty
+    ? Container(
+      height: 250,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: presentations[presentationIndex].imageUrls.length,
+        itemBuilder: (BuildContext context, int index) => Card(
+          child: Image.network(
+              presentations[presentationIndex].imageUrls[index],
+              fit: BoxFit.contain,
+              width: 300)
+        ),
+      ))
+    : Container();
+  }
+
+  Widget buildOutFitCarrousel(List<Presentation> presentations) {
+    print(presentations.first.imageUrls);
+    if (presentations.isNotEmpty && presentations.first.imageUrls.isNotEmpty) {
+      final slides = [
+        for(int index = 0; index < presentations.first.imageUrls.length; index++)
+          GestureDetector(
+            onTap: () {
+              if (outfitContent != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      ProductDescPage(tag: outfitContent!.productId.toString()+"o", data: outfitContent!, fromOutfits: true,))
+                );
+              }
+            },
+            child: Image.network(
+              presentations.first.imageUrls[index],
+              fit: BoxFit.contain,
+              width: 300),
+          )
+      ];
+      return Slider(slides: slides);
+    } else {
+      return Container();
+    }
   }
 }
 
@@ -169,6 +235,31 @@ class _AmountBuyNow extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class Slider extends StatelessWidget {
+  final List<Widget> slides;
+
+  const Slider({Key? key, required this.slides}) : super(key: key);
+  
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      items: slides,
+      options: CarouselOptions(
+          height: 250,
+          initialPage: 0,
+          enableInfiniteScroll: true,
+          reverse: false,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 3),
+          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enlargeCenterPage: true,
+          scrollDirection: Axis.horizontal,
+      )
     );
   }
 }

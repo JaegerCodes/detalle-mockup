@@ -10,11 +10,7 @@ class ProductsProvider extends ChangeNotifier {
     final resp =
         await BuscapeApi.httpGet('/products/catalog?searchWord=$searchWord');
     final productsResp = ProductsResponse.fromMap(resp);
-
-    //this.products = [...categoriesResp.categorias];
     this.products = productsResp.itemList;
-    print(products);
-
     notifyListeners();
   }
 }

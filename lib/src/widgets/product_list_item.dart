@@ -12,8 +12,6 @@ class ProductListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(tag);
-    print(data.productName);
     return GestureDetector(
       onTap: () {
         Navigator.push(
