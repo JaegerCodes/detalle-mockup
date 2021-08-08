@@ -35,7 +35,7 @@ class ProductDescPageState extends State<ProductDescPage> {
   getOutfits() async {
     if (!widget.fromOutfits && widget.data.outfitItems != null) {
       final id = widget.data.outfitItems!.first;
-      final resp = await BuscapeApi.httpGet('/products/1758103');
+      final resp = await BuscapeApi.httpGet('/products/$id');
       if (resp.itemList.isNotEmpty) {
         outfitContent = resp.itemList.first;
         outfits = outfitContent!.presentations;
