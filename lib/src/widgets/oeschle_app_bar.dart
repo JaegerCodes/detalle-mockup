@@ -13,16 +13,26 @@ class OeschleAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Palette.primary,
+      backgroundColor: isRoot? Color(0xFFE10000) : Palette.primary,
       leading: isRoot
           ? null
           : GestureDetector(
-              child: Icon(Icons.chevron_left, color: Colors.white, size: 40),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-      title: Text(title),
+            child: Icon(Icons.chevron_left, color: Colors.white, size: 40),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+      title: isRoot
+      ? Center(
+        child: Padding(
+          padding: const EdgeInsets.all(80.0),
+          child: Image(
+            image: AssetImage('assets/imgs/brand.png'),
+            fit: BoxFit.contain,
+          ),
+        ),
+      )
+      : Text(title),
     );
   }
 }
