@@ -43,6 +43,19 @@ class ProductDescPage extends StatelessWidget {
             child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              Container(
+                  height: 250,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: data.presentations.first.imageUrls.length,
+                    itemBuilder: (BuildContext context, int index) => Card(
+                      child: Image.network(
+                          data.presentations.first.imageUrls[index],
+                          fit: BoxFit.contain,
+                          width: 300),
+                    ),
+                  )),
               GestureDetector(
                   onTap: () async {
                     await platform.invokeMethod("startAR");
@@ -58,16 +71,6 @@ class ProductDescPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                   )),
-              Container(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: data.presentations.first.imageUrls.length,
-                  itemBuilder: (BuildContext context, int index) => Card(
-                        child: Image.network(data.presentations.first.imageUrls[index], fit: BoxFit.contain, width: 300),
-                      ),
-                )),
               ProductDescription(
                 titulo: data.productName,
                 descripcion: "",
