@@ -25,19 +25,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.buscape.pose.GraphicOverlay;
 import com.example.buscape.pose.PoseDetectorProcessor;
@@ -45,12 +43,8 @@ import com.example.buscape.pose.VisionImageProcessor;
 import com.example.buscape.utils.BitmapUtils;
 import com.example.buscape.utils.PreferenceUtils;
 import com.google.android.gms.common.annotation.KeepName;
-import com.google.mlkit.common.model.LocalModel;
-import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions;
-import com.google.mlkit.vision.label.defaults.ImageLabelerOptions;
-import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions;
-import com.google.mlkit.vision.objects.defaults.ObjectDetectorOptions;
 import com.google.mlkit.vision.pose.PoseDetectorOptionsBase;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

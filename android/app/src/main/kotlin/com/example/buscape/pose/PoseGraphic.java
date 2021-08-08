@@ -155,11 +155,13 @@ public class PoseGraphic extends GraphicOverlay.Graphic {
         double bodyHeight = Math.abs(top-bottom);
         top-=bodyHeight*0.2;
         bottom+=bodyHeight*0.05;
-        int left = (int)(rightShoulder.getPosition().x-bodyWidth*0.5);
-        int right = (int)(leftShoulder.getPosition().x+bodyWidth*0.4);
+        float left = (float)(rightShoulder.getPosition().x-bodyWidth*0.5);
+        float right = (float)(leftShoulder.getPosition().x+bodyWidth*0.4);
+        int lefTranslated = (int)translateX(left);
+        int rightTranslated = (int)translateX(right);
         canvas.drawBitmap(cloth,null,new Rect(
-                left,top,
-                right,bottom
+                rightTranslated,(int)translateY(top),
+                lefTranslated,(int)translateY(bottom)
         ),null);
 /*
     // Draw pose classification text.

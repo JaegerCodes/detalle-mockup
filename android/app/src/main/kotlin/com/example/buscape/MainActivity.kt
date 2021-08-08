@@ -13,7 +13,7 @@ class MainActivity: FlutterActivity() {
         super.onCreate(savedInstanceState)
 
         MethodChannel(flutterEngine!!.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
-            val intent = Intent(this, StillImageActivity::class.java)
+            val intent = Intent(this, LivePreviewActivity::class.java)
             startActivity(intent)
             result.success(true)
         }
