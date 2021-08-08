@@ -25,8 +25,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
 
 import com.google.common.primitives.Ints;
 import com.google.mlkit.vision.common.PointF3D;
@@ -35,7 +35,9 @@ import com.google.mlkit.vision.pose.PoseLandmark;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayDeque;
 import java.util.List;
+import java.util.Queue;
 
 /** Draw the detected pose in preview. */
 public class PoseGraphic extends GraphicOverlay.Graphic {
@@ -105,6 +107,27 @@ public class PoseGraphic extends GraphicOverlay.Graphic {
 
         return bitmap;
     }
+    public static class WindowedSmoothed{
+        Queue<Float> d = new ArrayDeque<>();
+        private int windowSize = 2;
+        private float curSum = 0;
+        void add(float data){
+            d.add(data);
+            curSum+=data;
+            if(d.size()>windowSize){
+                curSum-=d.peek();
+                d.remove();
+            }
+        }
+        float currAvg(){
+            return curSum/Math.max(d.size(),1);
+        }
+    }
+    static WindowedSmoothed
+            leftSmoothed = new WindowedSmoothed(),
+            rightSmoothed= new WindowedSmoothed(),
+            topSmoothed = new WindowedSmoothed(),
+            bottomSmoothed = new WindowedSmoothed();
     @Override
     public void draw(Canvas canvas) {
         List<PoseLandmark> landmarks = pose.getAllPoseLandmarks();
@@ -148,94 +171,50 @@ public class PoseGraphic extends GraphicOverlay.Graphic {
         PoseLandmark leftFootIndex = pose.getPoseLandmark(PoseLandmark.LEFT_FOOT_INDEX);
         PoseLandmark rightFootIndex = pose.getPoseLandmark(PoseLandmark.RIGHT_FOOT_INDEX);
 
-        int top = (int)(rightShoulder.getPosition().y+(int)leftShoulder.getPosition().y)/2;
-        int bottom = (int)(rightHip.getPosition().y+(int)leftHip.getPosition().y)/2;
-        double bodyWidth = Math.abs(rightShoulder.getPosition().x-(int)leftShoulder.getPosition().x);
-        double bodyHeight = Math.abs(top-bottom);
+        float top = (rightShoulder.getPosition().y+(int)leftShoulder.getPosition().y)/2.0f;
+        float bottom = (rightHip.getPosition().y+(int)leftHip.getPosition().y)/2.0f;
+        float bodyWidth = (float)Math.hypot(
+                rightShoulder.getPosition().x-leftShoulder.getPosition().x,
+                rightShoulder.getPosition().y-leftShoulder.getPosition().y
+        );
+        float bodyHeight = Math.abs(top-bottom);
         top-=bodyHeight*0.2;
         bottom+=bodyHeight*0.05;
         float left = (float)(rightShoulder.getPosition().x-bodyWidth*0.5);
         float right = (float)(leftShoulder.getPosition().x+bodyWidth*0.4);
-        int lefTranslated = (int)translateX(left);
-        int rightTranslated = (int)translateX(right);
-        //double angle = Math.atan2(rightShoulder.getPosition().y-leftShoulder.getPosition().y, bodyWidth);
-        canvas.drawBitmap(cloth,null,new Rect(
-                rightTranslated,(int)translateY(top),
-                lefTranslated,(int)translateY(bottom)
-        ),null);
-/*
-    // Draw pose classification text.
-    float classificationX = POSE_CLASSIFICATION_TEXT_SIZE * 0.5f;
-    for (int i = 0; i < poseClassification.size(); i++) {
-      float classificationY = (canvas.getHeight() - POSE_CLASSIFICATION_TEXT_SIZE * 1.5f
-          * (poseClassification.size() - i));
-      canvas.drawText(
-          poseClassification.get(i),
-          classificationX,
-          classificationY,
-          classificationTextPaint);
-    }
+        float leftTranslated = translateX(left);
+        float rightTranslated = translateX(right);
+        float topTranslated = translateY(top);
+        float bottomTranslated = translateY(bottom);
+        leftSmoothed.add(leftTranslated);
+        rightSmoothed.add(rightTranslated);
+        topSmoothed.add(topTranslated);
+        bottomSmoothed.add(bottomTranslated);
 
-    // Draw all the points
-    for (PoseLandmark landmark : landmarks) {
-      drawPoint(canvas, landmark, whitePaint);
-      if (visualizeZ && rescaleZForVisualization) {
-        zMin = min(zMin, landmark.getPosition3D().getZ());
-        zMax = max(zMax, landmark.getPosition3D().getZ());
-      }
-    }
+        leftTranslated = leftSmoothed.currAvg();
+        rightTranslated = rightSmoothed.currAvg();
+        topTranslated = topSmoothed.currAvg();
+        bottomTranslated = bottomSmoothed.currAvg();
 
+        float shoulderAngle = (float)(Math.atan2(leftShoulder.getPosition().y-rightShoulder.getPosition().y,
+                        rightShoulder.getPosition().x-(int)leftShoulder.getPosition().x)+Math.PI);
+        if(shoulderAngle > Math.PI){
+            shoulderAngle-=2*Math.PI;
+        }
+        float hipAngle = (float)(Math.atan2(leftHip.getPosition().y-rightHip.getPosition().y,
+                rightHip.getPosition().x-(int)leftHip.getPosition().x)+Math.PI);
+        if(hipAngle > Math.PI){
+            hipAngle-=2*Math.PI;
+        }
+        float angle = (shoulderAngle+hipAngle)/2;
 
-    // Face
-    drawLine(canvas, nose, lefyEyeInner, whitePaint);
-    drawLine(canvas, lefyEyeInner, lefyEye, whitePaint);
-    drawLine(canvas, lefyEye, leftEyeOuter, whitePaint);
-    drawLine(canvas, leftEyeOuter, leftEar, whitePaint);
-    drawLine(canvas, nose, rightEyeInner, whitePaint);
-    drawLine(canvas, rightEyeInner, rightEye, whitePaint);
-    drawLine(canvas, rightEye, rightEyeOuter, whitePaint);
-    drawLine(canvas, rightEyeOuter, rightEar, whitePaint);
-    drawLine(canvas, leftMouth, rightMouth, whitePaint);
-
-    drawLine(canvas, leftShoulder, rightShoulder, whitePaint);
-    drawLine(canvas, leftHip, rightHip, whitePaint);
-
-    // Left body
-    drawLine(canvas, leftShoulder, leftElbow, leftPaint);
-    drawLine(canvas, leftElbow, leftWrist, leftPaint);
-    drawLine(canvas, leftShoulder, leftHip, leftPaint);
-    drawLine(canvas, leftHip, leftKnee, leftPaint);
-    drawLine(canvas, leftKnee, leftAnkle, leftPaint);
-    drawLine(canvas, leftWrist, leftThumb, leftPaint);
-    drawLine(canvas, leftWrist, leftPinky, leftPaint);
-    drawLine(canvas, leftWrist, leftIndex, leftPaint);
-    drawLine(canvas, leftIndex, leftPinky, leftPaint);
-    drawLine(canvas, leftAnkle, leftHeel, leftPaint);
-    drawLine(canvas, leftHeel, leftFootIndex, leftPaint);
-
-    // Right body
-    drawLine(canvas, rightShoulder, rightElbow, rightPaint);
-    drawLine(canvas, rightElbow, rightWrist, rightPaint);
-    drawLine(canvas, rightShoulder, rightHip, rightPaint);
-    drawLine(canvas, rightHip, rightKnee, rightPaint);
-    drawLine(canvas, rightKnee, rightAnkle, rightPaint);
-    drawLine(canvas, rightWrist, rightThumb, rightPaint);
-    drawLine(canvas, rightWrist, rightPinky, rightPaint);
-    drawLine(canvas, rightWrist, rightIndex, rightPaint);
-    drawLine(canvas, rightIndex, rightPinky, rightPaint);
-    drawLine(canvas, rightAnkle, rightHeel, rightPaint);
-    drawLine(canvas, rightHeel, rightFootIndex, rightPaint);
-
-    // Draw inFrameLikelihood for all points
-    if (showInFrameLikelihood) {
-      for (PoseLandmark landmark : landmarks) {
-        canvas.drawText(
-            String.format(Locale.US, "%.2f", landmark.getInFrameLikelihood()),
-            translateX(landmark.getPosition().x),
-            translateY(landmark.getPosition().y),
-            whitePaint);
-      }
-    }*/
+        Matrix matrix = new Matrix();
+        matrix.reset();
+        matrix.postTranslate(-cloth.getWidth() / 2.0f, -cloth.getHeight() / 2.0f); // Centers image
+        matrix.postScale((leftTranslated-rightTranslated)/cloth.getWidth(),(bottomTranslated-topTranslated)/cloth.getHeight());
+        matrix.postRotate((float)(angle/Math.PI*180));
+        matrix.postTranslate((leftTranslated+rightTranslated)/2, (topTranslated+bottomTranslated)/2);
+        canvas.drawBitmap(cloth, matrix, null);
     }
 
     void drawPoint(Canvas canvas, PoseLandmark landmark, Paint paint) {
