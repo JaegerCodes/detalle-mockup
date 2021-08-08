@@ -28,6 +28,7 @@ class Item {
     required this.minPurchaseAmount,
     this.outfitPart,
     required this.presentations,
+    required this.outfitItems
   });
 
   String productId;
@@ -35,15 +36,16 @@ class Item {
   double minPurchaseAmount;
   String? outfitPart;
   List<Presentation> presentations;
-  //TODO: outfits
+  List<String>? outfitItems;
 
   factory Item.fromMap(Map<String, dynamic> json) => Item(
         productId: json["productId"],
         productName: json["productName"],
         minPurchaseAmount: (json["minPurchaseAmount"] as num).toDouble(),
         outfitPart: json["outfitPart"],
-        presentations: List<Presentation>.from(
-            json["presentations"].map((x) => Presentation.fromMap(x))),
+        presentations: List<Presentation>.from(json["presentations"].map((x) => Presentation.fromMap(x))),
+        outfitItems: json["outfitItems"] == null ? null : List<String>.from(json["outfitItems"]),
+        //outfitItems: json["outfitItems"],
       );
 }
 
