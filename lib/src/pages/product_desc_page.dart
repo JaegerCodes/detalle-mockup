@@ -30,7 +30,7 @@ class ProductDescPageState extends State<ProductDescPage> {
   List<Presentation> outfits = [];
   List<String> urls = [];
   Item? outfitContent;
-
+  int refreshCount = 0;
   static const platform = const MethodChannel("archannel");
 
   getOutfits() async {
@@ -44,7 +44,10 @@ class ProductDescPageState extends State<ProductDescPage> {
           if (outfitContent!.outfitUrls != null)
             urls = outfitContent!.outfitUrls!;
       }
-      setState(() {});
+      if (refreshCount == 0) {
+        refreshCount++;
+        setState(() {});
+      }
     }
 
     
