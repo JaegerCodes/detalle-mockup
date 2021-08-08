@@ -36,7 +36,6 @@ import com.google.mlkit.vision.pose.PoseLandmark;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Locale;
 
 /** Draw the detected pose in preview. */
 public class PoseGraphic extends GraphicOverlay.Graphic {
@@ -159,6 +158,7 @@ public class PoseGraphic extends GraphicOverlay.Graphic {
         float right = (float)(leftShoulder.getPosition().x+bodyWidth*0.4);
         int lefTranslated = (int)translateX(left);
         int rightTranslated = (int)translateX(right);
+        //double angle = Math.atan2(rightShoulder.getPosition().y-leftShoulder.getPosition().y, bodyWidth);
         canvas.drawBitmap(cloth,null,new Rect(
                 rightTranslated,(int)translateY(top),
                 lefTranslated,(int)translateY(bottom)

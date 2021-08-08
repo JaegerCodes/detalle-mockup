@@ -5,10 +5,10 @@ import 'button_color.dart';
 
 class ColorsAndMore extends StatelessWidget {
   final List<Presentation> presentations;
-  const ColorsAndMore({
-    Key? key,
-    required this.presentations,
-  }) : super(key: key);
+  final Function(int) callback;
+  const ColorsAndMore(
+      {Key? key, required this.presentations, required this.callback})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,15 @@ class ColorsAndMore extends StatelessWidget {
     for (var i = 0; i < colors.length; ++i) {
       colorButtons.add(Positioned(
           left: hspace * i,
-          child: ButtonColor(colors[i], (i + 1), 'assets/imgs/verde.png')));
+          child: ButtonColor(colors[i], (i + 1), () {
+            for (int j = 0; j < presentations.length; ++j) {
+              if (presentations[j].color == colors[i]) {
+                callback(j);
+                break;
+              }
+            }
+          })));
     }
-    
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30),

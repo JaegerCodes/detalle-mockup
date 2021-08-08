@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 class ButtonColor extends StatefulWidget {
   final Color color;
   final int index;
-  final String urlImagen;
+  final VoidCallback callback;
 
-  const ButtonColor(this.color, this.index, this.urlImagen);
+  const ButtonColor(this.color, this.index, this.callback);
 
   @override
   _ButtonColorState createState() => _ButtonColorState();
@@ -22,9 +22,7 @@ class _ButtonColorState extends State<ButtonColor> {
       duration: Duration(milliseconds: 300),
       child: GestureDetector(
         onTap: () {
-          final productModel = Provider.of<ProductModel>(context, listen: false);
-          productModel.assetImage = this.widget.urlImagen;
-          productModel.color = this.widget.color;
+          widget.callback();
         },
         child: Container(
           width: 45,

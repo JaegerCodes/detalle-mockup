@@ -16,33 +16,31 @@ class ProductIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productModel = Provider.of<ProductModel>(context);
-    return Hero(
-        tag: tag,
-        child: Container(
-            decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: this.fullPage
-                    ? BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40),
-                        topLeft: Radius.circular(0),
-                        topRight: Radius.circular(0))
-                    : BorderRadius.circular(size / 4)),
-            padding: EdgeInsets.all(0),
-            child: Stack(
-              children: <Widget>[
-                url == null
-                    ? Image(
-                        image: AssetImage(productModel.assetImage),
-                        width: this.fullPage ? null : size,
-                        height: this.fullPage ? null : size,
-                      )
-                    : Image.network(
-                        url!,
-                        width: this.fullPage ? null : size,
-                        height: this.fullPage ? null : size,
-                      )
-              ],
-            )));
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: this.fullPage
+                ? BorderRadius.only(
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
+                    topLeft: Radius.circular(0),
+                    topRight: Radius.circular(0))
+                : BorderRadius.circular(size / 4)),
+        padding: EdgeInsets.all(0),
+        child: Stack(
+          children: <Widget>[
+            url == null
+                ? Image(
+                    image: AssetImage(productModel.assetImage),
+                    width: this.fullPage ? null : size,
+                    height: this.fullPage ? null : size,
+                  )
+                : Image.network(
+                    url!,
+                    width: this.fullPage ? null : size,
+                    height: this.fullPage ? null : size,
+                  )
+          ],
+        ));
   }
 }

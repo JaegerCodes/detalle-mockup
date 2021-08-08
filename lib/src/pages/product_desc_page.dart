@@ -14,10 +14,18 @@ import 'package:buscape/src/helpers/helpers.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-class ProductDescPage extends StatelessWidget {
+class ProductDescPage extends StatefulWidget {
   final String tag;
   final Item data;
+
   const ProductDescPage({required this.tag, required this.data});
+
+  @override
+  ProductDescPageState createState() => ProductDescPageState();
+}
+
+class ProductDescPageState extends State<ProductDescPage> {
+  int presentationIndex = 0;
 
   static const platform = const MethodChannel("archannel");
 
@@ -31,7 +39,7 @@ class ProductDescPage extends StatelessWidget {
           productModel.color = this.color;
      */
     final productModel = Provider.of<ProductModel>(context, listen: false);
-    productModel.data = data;
+    productModel.data = widget.data;
 
     return Scaffold(
         body: Column(
@@ -48,10 +56,12 @@ class ProductDescPage extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: data.presentations.first.imageUrls.length,
+                    itemCount: widget
+                        .data.presentations[presentationIndex].imageUrls.length,
                     itemBuilder: (BuildContext context, int index) => Card(
                       child: Image.network(
-                          data.presentations.first.imageUrls[index],
+                          widget.data.presentations[presentationIndex]
+                              .imageUrls[index],
                           fit: BoxFit.contain,
                           width: 300),
                     ),
@@ -72,12 +82,18 @@ class ProductDescPage extends StatelessWidget {
                     ),
                   )),
               ProductDescription(
-                titulo: data.productName,
+                titulo: widget.data.productName,
                 descripcion: "",
               ),
-              _AmountBuyNow(data.minPurchaseAmount),
-              ColorsAndMore(presentations: data.presentations),
-              ProductSizeList(presentations: data.presentations),
+              _AmountBuyNow(widget.data.minPurchaseAmount),
+              ColorsAndMore(
+                  presentations: widget.data.presentations,
+                  callback: (index) {
+                    setState(() {
+                      this.presentationIndex = index;
+                    });
+                  }),
+              ProductSizeList(presentations: widget.data.presentations),
               _ButtonsLikeCartSettings()
             ],
           ),
