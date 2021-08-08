@@ -35,25 +35,32 @@ class ProductSizeList extends StatelessWidget {
   }
 }
 
-class ProductSizeButton extends StatelessWidget {
+class ProductSizeButton extends StatefulWidget {
   final String size;
 
   const ProductSizeButton({required this.size});
 
+  @override
+  _ProductSizeButtonState createState() => _ProductSizeButtonState();
+}
+
+class _ProductSizeButtonState extends State<ProductSizeButton> {
   @override
   Widget build(BuildContext context) {
     final productModel = Provider.of<ProductModel>(context);
 
     return GestureDetector(
       onTap: () {
+        
         final productModel = Provider.of<ProductModel>(context, listen: false);
-        productModel.size = this.size;
+        productModel.size = this.widget.size;
+        
       },
       child: Container(
         alignment: Alignment.center,
-        child: Text('$size',
+        child: Text('${widget.size}',
             style: TextStyle(
-                color: (this.size == productModel.size)
+                color: (this.widget.size == productModel.size)
                     ? Colors.white
                     : Palette.onPrimary,
                 fontSize: 16,
@@ -61,13 +68,13 @@ class ProductSizeButton extends StatelessWidget {
         width: 45,
         height: 45,
         decoration: BoxDecoration(
-            color: (this.size == productModel.size)
+            color: (this.widget.size == productModel.size)
                 ? Palette.onPrimary
                 : Colors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                  color: this.size == productModel.size
+                  color: this.widget.size == productModel.size
                       ? Palette.onPrimary
                       : Colors.grey[400]!,
                   blurRadius: 10,

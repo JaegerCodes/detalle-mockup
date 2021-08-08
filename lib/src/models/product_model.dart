@@ -17,6 +17,7 @@ class ProductModel with ChangeNotifier {
   String get size => this._size;
   set size(String valor) {
     this._size = valor;
+    notifyListeners();
   }
 
   void initSize(String valor) {
@@ -26,6 +27,7 @@ class ProductModel with ChangeNotifier {
   Color get color => this._color;
   set color(Color valor) {
     this._color = valor;
+    setPresentation(buscarPorColor: true);
     notifyListeners();
   }
 
@@ -39,15 +41,24 @@ class ProductModel with ChangeNotifier {
     this._presentation = valor;
   }
 
-  setPresentation() {
-    List<Presentation> presentations = _data!.presentations;
+  setPresentation({bool buscarPorColor = false}) {
+    List<Presentation> presentations = data.presentations;
 
-    for (var i = 0; i < presentations.length; ++i) {
-      final current = presentations[i];
-      if (current.size == _size && current.color == _color) {
-        this._presentation = current;
-        notifyListeners();
-        break;
+    if (buscarPorColor) {
+      for (var i = 0; i < presentations.length; ++i) {
+        final current = presentations[i];
+        if (current.color == color) {
+          presentation = current;
+          break;
+        }
+      }
+    } else {
+      for (var i = 0; i < presentations.length; ++i) {
+        final current = presentations[i];
+        if (current.size == size) {
+          presentation = current;
+          break;
+        }
       }
     }
   }

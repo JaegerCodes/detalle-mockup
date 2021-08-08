@@ -39,19 +39,6 @@ class ProductDescPage extends StatelessWidget {
         OeschleAppBar(
           title: "Detalle del producto",
         ),
-        Stack(
-          children: <Widget>[
-            ProductIcon(
-              url: (data.presentations.length > 0 &&
-                      data.presentations.first.imageUrls.length > 0)
-                  ? data.presentations.first.imageUrls.first
-                  : null,
-              tag: tag,
-              size: 0,
-              fullPage: true,
-            ),
-          ],
-        ),
         Expanded(
             child: SingleChildScrollView(
           child: Column(
@@ -71,6 +58,16 @@ class ProductDescPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                   )),
+              Container(
+                height: 250,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: data.presentations.first.imageUrls.length,
+                  itemBuilder: (BuildContext context, int index) => Card(
+                        child: Image.network(data.presentations.first.imageUrls[index], fit: BoxFit.contain, width: 300),
+                      ),
+                )),
               ProductDescription(
                 titulo: data.productName,
                 descripcion: "",
