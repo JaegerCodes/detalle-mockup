@@ -22,14 +22,13 @@ class ProductsResponse {
 }
 
 class Item {
-  Item({
-    required this.productId,
-    required this.productName,
-    required this.minPurchaseAmount,
-    this.outfitPart,
-    required this.presentations,
-    required this.outfitItems
-  });
+  Item(
+      {required this.productId,
+      required this.productName,
+      required this.minPurchaseAmount,
+      this.outfitPart,
+      required this.presentations,
+      required this.outfitItems});
 
   String productId;
   String productName;
@@ -43,8 +42,11 @@ class Item {
         productName: json["productName"],
         minPurchaseAmount: (json["minPurchaseAmount"] as num).toDouble(),
         outfitPart: json["outfitPart"],
-        presentations: List<Presentation>.from(json["presentations"].map((x) => Presentation.fromMap(x))),
-        outfitItems: json["outfitItems"] == null ? null : List<String>.from(json["outfitItems"]),
+        presentations: List<Presentation>.from(
+            json["presentations"].map((x) => Presentation.fromMap(x))),
+        outfitItems: (json["outfitItems"] == null || json["outfitItems"] == "")
+            ? []
+            : List<String>.from(json["outfitItems"]),
         //outfitItems: json["outfitItems"],
       );
 }
